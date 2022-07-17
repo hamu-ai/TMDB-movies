@@ -2,7 +2,7 @@
 
 映画を横スクロールする事で他の映画を見ることができます。
 
-###　スタイリング
+### スタイリング
 
 tailwind css https://tailwindcss.com/docs/installation
 
@@ -10,7 +10,7 @@ tailwind css https://tailwindcss.com/docs/installation
 
 Material-UI 　https://mui.com/material-ui/getting-started/installation/
 
-###　 youtube で見えるように
+### youtube で見えるように
 
 react-player-npm https://github.com/cookpete/react-player
 
