@@ -2,6 +2,10 @@
 
 映画を横スクロールする事で他の映画を見ることができます。
 
+### Vercel
+
+https://tmdb-movies-2zj2lbjs1-hamu-ai.vercel.app/
+
 ### スタイリング
 
 tailwind css https://tailwindcss.com/docs/installation
