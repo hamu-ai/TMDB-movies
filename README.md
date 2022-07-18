@@ -12,7 +12,7 @@ tailwind css https://tailwindcss.com/docs/installation
 
 ### デザイン
 
-https://www.npmjs.com/package/tailwind-scrollbar-hide　追い風スクロールバー非表示
+追い風スクロールバー非表示　https://www.npmjs.com/package/tailwind-scrollbar-hide　
 
 Material-UI 　https://mui.com/material-ui/getting-started/installation/
 
