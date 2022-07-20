@@ -1,10 +1,15 @@
 ### TMDB を使って映画サイト Next.js で作りました。
 
 映画を横スクロールする事で他の映画を見ることができます。
+再生ボタン　もしくは　画像をクリックするとyoutubeで動画を見ることができます。
 
 ### Vercel
 
 https://tmdb-movies-2zj2lbjs1-hamu-ai.vercel.app/
+
+### 状態管理ライブラリー
+
+Recoil  https://recoiljs.org/
 
 ### スタイリング
 
