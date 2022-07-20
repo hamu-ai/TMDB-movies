@@ -14,7 +14,7 @@ Recoil  https://recoiljs.org/
 
 ### スタイリング
 
-tailwind css https://tailwindcss.com/docs/installation
+tailwind css　 https://tailwindcss.com/docs/installation
 
 ### デザイン
 
