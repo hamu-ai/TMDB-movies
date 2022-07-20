@@ -1,6 +1,9 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRecoilValue } from "recoil";
+import { MoviesState } from "src/atom/MovieState";
 import BackImage from "src/components/BackImage";
+import Modals from "src/components/Modal";
 import Moviemain from "src/components/Moviemain";
 import { Movies } from "src/type";
 import { response } from "src/utils";
@@ -12,6 +15,8 @@ type Props = {
 };
 
 const Home: NextPage<Props> = ({ comingSoon, TopRating, popular }) => {
+  const movieModal = useRecoilValue(MoviesState);
+
   return (
     <div>
       <Head>
@@ -25,6 +30,8 @@ const Home: NextPage<Props> = ({ comingSoon, TopRating, popular }) => {
       <Moviemain title={"近日公開"} movie={comingSoon} />
       <Moviemain title={"トップ評価"} movie={TopRating} />
       <Moviemain title={"人気"} movie={popular} />
+
+      {movieModal && <Modals />}
     </div>
   );
 };

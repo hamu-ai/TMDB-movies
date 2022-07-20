@@ -1,14 +1,19 @@
 import Image from "next/image";
-import { FC, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import { Movies } from "src/type";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { MoviesDataState, MoviesState } from "src/atom/MovieState";
+import { useRecoilState } from "recoil";
 type Props = {
   title: string;
   movie: Movies[];
 };
 
 const Moviemain: FC<Props> = ({ title, movie }) => {
+  const [open, setOpen] = useRecoilState(MoviesState);
+  const [movies, setMovies] = useRecoilState(MoviesDataState);
+
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClick = (direction: string) => {
@@ -35,6 +40,10 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
         {movie.map((movies) => {
           return (
             <div
+              onClick={() => {
+                setOpen(true);
+                setMovies(movies);
+              }}
               key={movies.id}
               className="relative md:h-40 mx-1 md:w-screen md:px-20 h-20 w-20  px-20  "
             >

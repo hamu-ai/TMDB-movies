@@ -1,5 +1,7 @@
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 import { MovieUrl } from "src/utils/movies";
 
@@ -8,7 +10,10 @@ type Props = {
 };
 
 const BackImage: FC<Props> = ({ comingSoon }) => {
+  const [open, setOpen] = useRecoilState(MoviesState);
   const [movie, setMovi] = useState<Movies | null>(null);
+  const [movies, setMovies] = useRecoilState(MoviesDataState);
+
   useEffect(() => {
     setMovi(comingSoon[Math.floor(Math.random() * comingSoon.length)]);
   }, [comingSoon]);
@@ -29,7 +34,13 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
       <p className="text-sm md:text-md  max-w-sm md:max-w-lg  lg:max-w-xl">
         {movie?.overview}
       </p>
-      <button className="w-20 mt-8 text-2xl font-bold bg-white  text-blue-600 hover:text-blue-400">
+      <button
+        onClick={() => {
+          setOpen(true);
+          setMovies(movie);
+        }}
+        className="w-20 mt-8 text-2xl font-bold bg-white  text-blue-600 hover:text-blue-400"
+      >
         再生
       </button>
     </div>
