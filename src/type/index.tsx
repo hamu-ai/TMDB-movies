@@ -17,3 +17,7 @@ export type Movies = {
   vote_average: number;
   vote_count: number;
 };
+
+export type Element = {
+  type: "Trailer";
+};
