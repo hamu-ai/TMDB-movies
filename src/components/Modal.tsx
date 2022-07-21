@@ -54,7 +54,7 @@ const Modals: FC = () => {
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
-        <Box sx={style} className="md:w-1/2  mx-auto bg-black  mt-4   ">
+        <Box sx={style} className="w-[60vh]  mx-auto bg-black  mt-4   ">
           <Clear onClick={() => setOpen(false)} className="ml-4" />
           <ReactPlayer
             width={"100%"}
