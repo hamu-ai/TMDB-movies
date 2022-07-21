@@ -12,9 +12,15 @@ type Props = {
   comingSoon: Movies[];
   TopRating: Movies[];
   popular: Movies[];
+  fetchtrend: Movies[];
 };
 
-const Home: NextPage<Props> = ({ comingSoon, TopRating, popular }) => {
+const Home: NextPage<Props> = ({
+  comingSoon,
+  TopRating,
+  popular,
+  fetchtrend,
+}) => {
   const movieModal = useRecoilValue(MoviesState);
 
   return (
@@ -30,6 +36,7 @@ const Home: NextPage<Props> = ({ comingSoon, TopRating, popular }) => {
       <Moviemain title={"近日公開"} movie={comingSoon} />
       <Moviemain title={"トップ評価"} movie={TopRating} />
       <Moviemain title={"人気"} movie={popular} />
+      <Moviemain title={"トレンド"} movie={fetchtrend} />
 
       {movieModal && <Modals />}
     </div>
@@ -37,10 +44,11 @@ const Home: NextPage<Props> = ({ comingSoon, TopRating, popular }) => {
 };
 
 export const getServerSideProps = async () => {
-  const [comingSoon, TopRating, popular] = await Promise.all([
+  const [comingSoon, TopRating, popular, fetchtrend] = await Promise.all([
     fetch(response.fetchcomingSoon).then((res) => res.json()),
     fetch(response.fetchTopRating).then((res) => res.json()),
     fetch(response.fetchpopular).then((res) => res.json()),
+    fetch(response.fetchtrend).then((res) => res.json()),
   ]);
 
   return {
@@ -48,6 +56,7 @@ export const getServerSideProps = async () => {
       comingSoon: comingSoon.results,
       TopRating: TopRating.results,
       popular: popular.results,
+      fetchtrend: fetchtrend.results,
     },
   };
 };
