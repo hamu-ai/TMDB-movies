@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { FC, useRef } from "react";
+import { FC, useRef, useState } from "react";
 import { Movies } from "src/type";
 import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -13,6 +13,8 @@ type Props = {
 const Moviemain: FC<Props> = ({ title, movie }) => {
   const [open, setOpen] = useRecoilState(MoviesState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
+  const [left, setLeft] = useState(false);
+  const [right, setRight] = useState(true);
 
   const ref = useRef<HTMLDivElement>(null);
 
@@ -20,11 +22,26 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
     if (ref.current) {
       const scrollLeft = ref.current.scrollLeft;
       const clientWidth = ref.current.clientWidth;
+      const scrollWidth = ref.current.scrollWidth;
 
       const scrollTo =
         direction === "left"
           ? scrollLeft - clientWidth
           : scrollLeft + clientWidth;
+
+      if (scrollTo > 0) {
+        setLeft(true);
+      } else {
+        setLeft(false);
+      }
+
+      const ScrollMaxX = scrollWidth - clientWidth;
+
+      if (scrollTo > ScrollMaxX) {
+        setRight(false);
+      } else {
+        setRight(true);
+      }
 
       ref.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
@@ -58,26 +75,29 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
             </div>
           );
         })}
+        {left ? (
+          <ArrowBackIos
+            onClick={() => handleClick("left")}
+            className="absolute left-5 mt-8  md:mt-16 md:ml-2 transition hover:-translate-y-1 hover:scale-110 cursor-pointer"
+            sx={{
+              "@media screen and (min-width:765px)": {
+                fontSize: 40,
+              },
+            }}
+          />
+        ) : null}
 
-        <ArrowBackIos
-          onClick={() => handleClick("left")}
-          className=" absolute left-5 mt-8  md:mt-16 md:ml-2 transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
-          sx={{
-            "@media screen and (min-width:765px)": {
-              fontSize: 40,
-            },
-          }}
-        />
-
-        <ArrowForwardIosIcon
-          onClick={() => handleClick("right")}
-          className="absolute right-5 mt-8 md:mt-16 md:mr-2   transition hover:-translate-y-1 hover:scale-110 cursor-pointer"
-          sx={{
-            "@media screen and (min-width:765px)": {
-              fontSize: 40,
-            },
-          }}
-        />
+        {right ? (
+          <ArrowForwardIosIcon
+            onClick={() => handleClick("right")}
+            className="absolute right-5 mt-8 md:mt-16 md:mr-2   transition hover:-translate-y-1 hover:scale-110 cursor-pointer"
+            sx={{
+              "@media screen and (min-width:765px)": {
+                fontSize: 40,
+              },
+            }}
+          />
+        ) : null}
       </div>
     </div>
   );
