@@ -39,7 +39,10 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
         <Button
           variant="contained"
           className="font-bold text-xl mt-4 "
-          onClick={() => setOpen(true)}
+          onClick={() => {
+            setOpen(true);
+            setMovies(movie);
+          }}
         >
           再生
         </Button>
