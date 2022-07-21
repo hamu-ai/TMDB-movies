@@ -4,6 +4,8 @@
 
 再生ボタン　もしくは　画像をクリックするとyoutubeで動画を見ることができます。
 
+動画が再生されない場合もありますが、それはエラーではありません。
+
 ### Vercel
 
 https://tmdb-movies-2zj2lbjs1-hamu-ai.vercel.app/
