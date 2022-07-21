@@ -63,11 +63,13 @@ const Modals: FC = () => {
             controls={true}
             url={`https://www.youtube.com/watch?v=${data}`}
           />
-          <FavoriteBorder className="absolute right-12 mb-7  " />
+
           <h1 className="ml-4 lg:text-xl mb-2">{movies?.title}</h1>
-          <div className="flex gap-x-2 ml-4">
+          <div className="flex gap-x-3 ml-4">
             <p>公開日{movies?.release_date}</p>
             <p>評価{movies?.vote_average}</p>
+            {"お気に入り"}
+            <FavoriteBorder className="  " />
           </div>
           <p className="text-xs lg:text-lg lg:max-w-none max-w-xs ml-4">
             {movies?.overview}
