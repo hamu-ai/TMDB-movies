@@ -1,3 +1,4 @@
+import { Button, Stack } from "@mui/material";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -34,15 +35,15 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
       <p className="text-sm md:text-md  max-w-sm md:max-w-lg  lg:max-w-xl">
         {movie?.overview}
       </p>
-      <button
-        onClick={() => {
-          setOpen(true);
-          setMovies(movie);
-        }}
-        className="w-20 mt-8 text-2xl font-bold bg-white  text-blue-600 hover:text-blue-400"
-      >
-        再生
-      </button>
+      <Stack spacing={2} direction="row">
+        <Button
+          variant="contained"
+          className="font-bold text-xl mt-4 "
+          onClick={() => setOpen(true)}
+        >
+          再生
+        </Button>
+      </Stack>
     </div>
   );
 };
