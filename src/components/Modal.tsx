@@ -1,6 +1,8 @@
 import { FC, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import MuiModal from "@mui/material/Modal";
+import Clear from "@mui/icons-material/Clear";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
 import ReactPlayer from "react-player";
@@ -9,9 +11,9 @@ import { Element } from "src/type";
 
 const style = {
   position: "absolute" as "absolute",
-  top: "30%",
+
   left: "50%",
-  transform: "translate(-50%, -50%)",
+  transform: "translate( -50%)",
   width: 400,
   bgcolor: "black",
   border: "2px solid #000",
@@ -48,10 +50,12 @@ const Modals: FC = () => {
 
     WatchVideo();
   }, [movies]);
+
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
-        <Box sx={style} className="md:w-1/2  mx-auto bg-black   ">
+        <Box sx={style} className="md:w-1/2  mx-auto bg-black  mt-4   ">
+          <Clear onClick={() => setOpen(false)} className="ml-4" />
           <ReactPlayer
             width={"100%"}
             height={300}
@@ -59,6 +63,15 @@ const Modals: FC = () => {
             controls={true}
             url={`https://www.youtube.com/watch?v=${data}`}
           />
+          <FavoriteBorder className="absolute right-12 mb-7  " />
+          <h1 className="ml-4 lg:text-xl mb-2">{movies?.title}</h1>
+          <div className="flex gap-x-2 ml-4">
+            <p>公開日{movies?.release_date}</p>
+            <p>評価{movies?.vote_average}</p>
+          </div>
+          <p className="text-xs lg:text-lg lg:max-w-none max-w-xs ml-4">
+            {movies?.overview}
+          </p>
         </Box>
       </MuiModal>
     </div>
