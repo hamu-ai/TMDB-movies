@@ -14,7 +14,7 @@ const style = {
 
   left: "50%",
   transform: "translate( -50%)",
-  width: 400,
+
   bgcolor: "black",
   border: "2px solid #000",
   boxShadow: 24,
@@ -54,7 +54,10 @@ const Modals: FC = () => {
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
-        <Box sx={style} className="w-[60vh]  mx-auto bg-black  mt-4   ">
+        <Box
+          sx={style}
+          className="md:w-[60vh] w-full mx-auto bg-black  mt-4   "
+        >
           <Clear onClick={() => setOpen(false)} className="ml-4" />
           <ReactPlayer
             width={"100%"}
