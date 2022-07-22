@@ -38,7 +38,6 @@ const Modals: FC = () => {
           process.env.NEXT_PUBLIC_API_KEY
         }&language=en-US&append_to_response=videos`
       ).then((res) => res.json());
-      console.log(data);
 
       if (data.videos) {
         const index = data.videos.results.findIndex(
