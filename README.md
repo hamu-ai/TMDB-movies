@@ -25,13 +25,13 @@ React.Context でfirebaseログイン実装　参考にしたサイト　→　h
 
 tailwind css　https://tailwindcss.com/docs/installation
 
-firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
-
 ### デザイン
 
 追い風スクロールバー非表示　https://www.npmjs.com/package/tailwind-scrollbar-hide　
 
 Material-UI 　https://mui.com/material-ui/getting-started/installation/
+
+firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
 
 ### youtube で見えるように
 
