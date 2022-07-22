@@ -18,12 +18,14 @@ https://tmdb-movies-2zj2lbjs1-hamu-ai.vercel.app/
 
 Recoil  https://recoiljs.org/
 
-React.Context でfirebase　ログイン実装　参考にしたサイト　　https://zenn.dev/minguu42/articles/20210705-nextjs-auth
+React.Context でfirebaseログイン実装　参考にしたサイト　→　https://zenn.dev/minguu42/articles/20210705-nextjs-auth
 
 
 ### スタイリング
 
 tailwind css　https://tailwindcss.com/docs/installation
+
+firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
 
 ### デザイン
 
