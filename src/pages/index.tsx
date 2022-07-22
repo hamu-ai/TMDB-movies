@@ -10,6 +10,7 @@ import { response } from "src/utils";
 
 type Props = {
   comingSoon: Movies[];
+  comingSoon2: Movies[];
   TopRating: Movies[];
   popular: Movies[];
   fetchtrend: Movies[];
@@ -17,6 +18,7 @@ type Props = {
 
 const Home: NextPage<Props> = ({
   comingSoon,
+  comingSoon2,
   TopRating,
   popular,
   fetchtrend,
@@ -33,7 +35,8 @@ const Home: NextPage<Props> = ({
 
       <BackImage comingSoon={comingSoon} />
 
-      <Moviemain title={"近日公開"} movie={comingSoon} />
+      <Moviemain title={"近日公開予定"} movie={comingSoon} />
+      <Moviemain movie={comingSoon2} />
       <Moviemain title={"トップ評価"} movie={TopRating} />
       <Moviemain title={"人気"} movie={popular} />
       <Moviemain title={"トレンド"} movie={fetchtrend} />
@@ -44,16 +47,19 @@ const Home: NextPage<Props> = ({
 };
 
 export const getServerSideProps = async () => {
-  const [comingSoon, TopRating, popular, fetchtrend] = await Promise.all([
-    fetch(response.fetchcomingSoon).then((res) => res.json()),
-    fetch(response.fetchTopRating).then((res) => res.json()),
-    fetch(response.fetchpopular).then((res) => res.json()),
-    fetch(response.fetchtrend).then((res) => res.json()),
-  ]);
+  const [comingSoon, TopRating, popular, fetchtrend, comingSoon2] =
+    await Promise.all([
+      fetch(response.fetchcomingSoon).then((res) => res.json()),
+      fetch(response.fetchcomingSoon2).then((res) => res.json()),
+      fetch(response.fetchTopRating).then((res) => res.json()),
+      fetch(response.fetchpopular).then((res) => res.json()),
+      fetch(response.fetchtrend).then((res) => res.json()),
+    ]);
 
   return {
     props: {
       comingSoon: comingSoon.results,
+      comingSoon2: comingSoon2.results,
       TopRating: TopRating.results,
       popular: popular.results,
       fetchtrend: fetchtrend.results,
