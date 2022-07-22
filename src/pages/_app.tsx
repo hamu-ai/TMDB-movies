@@ -1,14 +1,15 @@
 import "src/styles/globals.css";
 import type { AppProps } from "next/app";
-import Heder from "src/components/Heder";
 import { RecoilRoot } from "recoil";
+import AuthProvider from "src/hook/AuthContext";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <RecoilRoot>
-      <Heder />
-      <Component {...pageProps} />
-    </RecoilRoot>
+    <AuthProvider>
+      <RecoilRoot>
+        <Component {...pageProps} />
+      </RecoilRoot>
+    </AuthProvider>
   );
 }
 
