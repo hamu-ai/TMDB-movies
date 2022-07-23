@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from "react";
 import Box from "@mui/material/Box";
 import MuiModal from "@mui/material/Modal";
 import Clear from "@mui/icons-material/Clear";
+import VolumeUp from "@mui/icons-material/VolumeUp";
+import VolumeOff from "@mui/icons-material/VolumeOff";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
@@ -24,6 +26,7 @@ const Modals: FC = () => {
   const [open, setOpen] = useRecoilState(MoviesState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [data, setData] = useState("");
+  const [muted, setMuted] = useState(false);
 
   const handleClose = () => setOpen(false);
 
@@ -62,11 +65,19 @@ const Modals: FC = () => {
             width={"100%"}
             height={300}
             playing
-            controls={true}
+            muted={muted}
             url={`https://www.youtube.com/watch?v=${data}`}
           />
-
-          <h1 className="ml-4 lg:text-xl mb-2">{movies?.title}</h1>
+          <div className="flex">
+            <button onClick={() => setMuted(!muted)}>
+              {muted === false ? (
+                <VolumeUp className=" relative bottom-10 left-12" />
+              ) : (
+                <VolumeOff className=" relative bottom-10 left-12" />
+              )}
+            </button>
+            <h1 className="ml-4 lg:text-xl mb-2 ">{movies?.title}</h1>
+          </div>
           <div className="flex gap-x-3 ml-4">
             <p>公開日{movies?.release_date}</p>
             <p>評価{movies?.vote_average}</p>
