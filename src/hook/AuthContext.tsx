@@ -37,24 +37,28 @@ type Child = {
 
 const AuthProvider = ({ children }: Child) => {
   const [user, setUser] = useState<User | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
 
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        // User is signed in, see docs for a list of available properties
-        // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid;
-        // ...
-      } else {
-        // User is signed out
-        // ...
-        router.push("SingIn");
-      }
-    });
-  });
+  useEffect(
+    () =>
+      onAuthStateChanged(auth, (user) => {
+        if (user) {
+          setLoading(false);
+        } else {
+          // Not logged in...
+          setLoading(false);
+          router.push("/SingIn");
+        }
+      }),
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [auth]
+  );
 
   const singUp = async (email: string, password: string) => {
+    setLoading(false);
     await createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
@@ -64,18 +68,16 @@ const AuthProvider = ({ children }: Child) => {
       })
       .catch((error) => {
         console.log(error);
-
-        // ..
       });
   };
 
   const singIn = async (email: string, password: string) => {
-    await signInWithEmailAndPassword(auth, email, password)
+    setLoading(false);
+    signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         // Signed in
         setUser(userCredential.user);
         router.push("/");
-        // ...
       })
       .catch((error) => {
         console.log(error);
@@ -83,11 +85,10 @@ const AuthProvider = ({ children }: Child) => {
   };
 
   const singOut = async () => {
+    setLoading(false);
     await signOut(auth)
       .then(() => {
-        // Signed in
-        router.push("/Sngin");
-        // ...
+        setUser(null);
       })
       .catch((error) => {
         console.log(error);
@@ -100,7 +101,11 @@ const AuthProvider = ({ children }: Child) => {
     singOut,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={value}>
+      {loading ? <p>Loading</p> : children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;
