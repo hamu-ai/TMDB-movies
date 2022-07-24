@@ -40,7 +40,6 @@ const Sngin: NextPage = () => {
       >
         <input
           type="email"
-          required
           placeholder="メールアドレス"
           className=" border border-black bg-gray-600 cursor-default "
           {...register("email", { required: true })}
