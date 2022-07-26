@@ -1,15 +1,15 @@
-import { NextPage } from "next";
 import Image from "next/image";
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useAuth } from "src/hook/AuthContext";
+import { NextPageWithLayout } from "./_app";
 
 type Inputs = {
   email: string;
   password: string;
 };
 
-const Sngin: NextPage = () => {
+const Sngin: NextPageWithLayout = () => {
   const { singIn, singUp } = useAuth();
   const [login, setLogin] = useState(false);
 
@@ -30,7 +30,7 @@ const Sngin: NextPage = () => {
       <Image
         src={"/movie.png"}
         layout="fill"
-        className="object-cover"
+        className="object-cover "
         alt="error"
       />
 
@@ -81,6 +81,10 @@ const Sngin: NextPage = () => {
       </form>
     </div>
   );
+};
+
+Sngin.getLayout = function getLayout(page: ReactElement) {
+  return <>{page}</>;
 };
 
 export default Sngin;
