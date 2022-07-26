@@ -1,11 +1,19 @@
-import { Button, Stack } from "@mui/material";
+import { MenuItem } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useAuth } from "src/hook/AuthContext";
+import Nav from "./Nav";
+import Mueus from "./Menus";
+import Logout from "@mui/icons-material/Logout";
 
 const Heder: FC = () => {
-  const [isScroll, setScroll] = useState(false);
-
   const { singOut } = useAuth();
+  const [isScroll, setScroll] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handlLogout = () => {
+    singOut();
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -20,14 +28,14 @@ const Heder: FC = () => {
     <div
       className={`
     ${isScroll ? "bg-red-600 text-white" : "text-red-600"} 
-    flex w-screen  h-10 p-10 items-center  fixed z-10`}
+    flex w-screen  h-10 p-10 items-center  fixed z-10  `}
     >
-      <h1 className="font-bold text-2xl flex-1 ">Movies</h1>
-      <Stack spacing={2} direction="row">
-        <Button onClick={singOut} variant="contained">
-          ログアウト
-        </Button>
-      </Stack>
+      <Nav />
+      <Mueus
+        style={"!bg-blue-600  hover:!bg-blue-400"}
+        Icons={<Logout fontSize="small" />}
+        props={<MenuItem onClick={handlLogout}>ログアウトしますか？</MenuItem>}
+      />
     </div>
   );
 };
