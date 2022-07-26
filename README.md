@@ -27,5 +27,7 @@ Material-UI 　https://mui.com/material-ui/getting-started/installation/
 
 firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
 
+ react-hot-toastでtoast状態　https://react-hot-toast.com/
+
 ### youtube で見えるように
 react-player-npm https://github.com/cookpete/react-player
