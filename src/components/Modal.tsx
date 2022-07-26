@@ -4,12 +4,13 @@ import MuiModal from "@mui/material/Modal";
 import Clear from "@mui/icons-material/Clear";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import VolumeOff from "@mui/icons-material/VolumeOff";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
 import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
+import { Toaster } from "react-hot-toast";
+import ModalMenus from "./ModalMenus";
 
 const style = {
   position: "absolute" as "absolute",
@@ -41,7 +42,6 @@ const Modals: FC = () => {
           process.env.NEXT_PUBLIC_API_KEY
         }&language=en-US&append_to_response=videos`
       ).then((res) => res.json());
-
       if (data.videos) {
         const index = data.videos.results.findIndex(
           (element: Element) => element.type === "Trailer"
@@ -49,17 +49,13 @@ const Modals: FC = () => {
         setData(data.videos?.results[index]?.key);
       }
     };
-
     WatchVideo();
   }, [movies]);
 
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
-        <Box
-          sx={style}
-          className="md:w-[60vh] w-full mx-auto bg-black  mt-4   "
-        >
+        <Box sx={style} className="md:w-[60vh] w-full mx-auto bg-black  mt-4 ">
           <Clear onClick={() => setOpen(false)} className="ml-4" />
           <ReactPlayer
             width={"100%"}
@@ -68,25 +64,30 @@ const Modals: FC = () => {
             muted={muted}
             url={`https://www.youtube.com/watch?v=${data}`}
           />
-          <div className="flex">
+          <Toaster position="top-left" reverseOrder={false} />
+
+          <div className="flex  relative bottom-6 md:bottom-3">
+            <div className="relative md:bottom-3 ml-6">
+              <ModalMenus />
+            </div>
             <button onClick={() => setMuted(!muted)}>
               {muted === false ? (
-                <VolumeUp className=" relative bottom-10 left-12" />
+                <VolumeUp className=" relative md:bottom-3 left-12" />
               ) : (
-                <VolumeOff className=" relative bottom-10 left-12" />
+                <VolumeOff className="  relative md:bottom-3 left-12 " />
               )}
             </button>
-            <h1 className="ml-4 lg:text-xl mb-2 ">{movies?.title}</h1>
           </div>
-          <div className="flex gap-x-3 ml-4">
-            <p>公開日{movies?.release_date}</p>
-            <p>評価{movies?.vote_average}</p>
-            {"お気に入り"}
-            <FavoriteBorder className="  " />
+          <div className="relative  bottom-5">
+            <h1 className="ml-4  lg:text-xl mb-2 ">{movies?.title}</h1>
+            <div className="flex gap-x-3 ml-4">
+              <p>公開日{movies?.release_date}</p>
+              <p>評価{movies?.vote_average}</p>
+            </div>
+            <p className="text-xs lg:text-lg lg:max-w-none max-w-sm ml-4 ">
+              {movies?.overview}
+            </p>
           </div>
-          <p className="text-xs lg:text-lg lg:max-w-none max-w-xs ml-4">
-            {movies?.overview}
-          </p>
         </Box>
       </MuiModal>
     </div>
