@@ -16,12 +16,14 @@ import {
 import { auth } from "src/lib/firebase";
 
 type Props = {
+  user: User | null;
   singUp: (email: string, password: string) => Promise<void>;
   singIn: (email: string, password: string) => Promise<void>;
   singOut: () => Promise<void>;
 };
 
 const AuthContext = createContext<Props>({
+  user: null,
   singUp: async () => {},
   singIn: async () => {},
   singOut: async () => {},
@@ -46,8 +48,10 @@ const AuthProvider = ({ children }: Child) => {
       onAuthStateChanged(auth, (user) => {
         if (user) {
           setLoading(false);
+          setUser(user);
         } else {
           // Not logged in...
+          setUser(null);
           setLoading(false);
           router.push("/SingIn");
         }
@@ -64,6 +68,7 @@ const AuthProvider = ({ children }: Child) => {
         // Signed in
         setUser(userCredential.user);
         router.push("/");
+        setLoading(false);
         // ...
       })
       .catch((error) => {
@@ -78,6 +83,7 @@ const AuthProvider = ({ children }: Child) => {
         // Signed in
         setUser(userCredential.user);
         router.push("/");
+        setLoading(false);
       })
       .catch((error) => {
         console.log(error);
@@ -99,6 +105,7 @@ const AuthProvider = ({ children }: Child) => {
     singUp,
     singIn,
     singOut,
+    user,
   };
 
   return (
