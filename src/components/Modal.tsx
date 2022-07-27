@@ -14,6 +14,7 @@ import { MenuItem } from "@mui/material";
 import { doc, setDoc } from "firebase/firestore";
 import { db } from "src/lib/firebase";
 import toast from "react-hot-toast";
+import { useAuth } from "src/hook/AuthContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -32,6 +33,7 @@ const Modals: FC = () => {
   const [data, setData] = useState("");
   const [muted, setMuted] = useState(false);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { user } = useAuth();
 
   const handleClose = () => setOpen(false);
 
@@ -57,9 +59,12 @@ const Modals: FC = () => {
   }, [movies]);
 
   const handleAdd = async () => {
-    await setDoc(doc(db, "movies", `${movies?.id}`), {
-      movies,
-    });
+    await setDoc(
+      doc(db, "movies", user!.uid, "movie", movies?.id.toString()!),
+      {
+        movies,
+      }
+    );
 
     toast(
       `${movies?.title || movies?.original_name} 

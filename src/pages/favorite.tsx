@@ -8,20 +8,23 @@ import { Movies } from "src/type";
 import Image from "next/image";
 import Modals from "src/components/Modal";
 import ModalMenus from "src/components/ModalMenus";
+import { useAuth } from "src/hook/AuthContext";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
   const [open, setOpen] = useRecoilState(MoviesState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [posts, setPosts] = useState<Movies[]>([]);
+  const { user } = useAuth();
 
   useEffect(() => {
-    const postData = collection(db, "movies");
+    if (!user?.uid) return;
+    const postData = collection(db, "movies", user!.uid, "movie");
     getDocs(postData).then((snapShot) => {
       setPosts(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
       console.log(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
     });
-  }, []);
+  }, [user]);
 
   return (
     <div className="relative top-20 ">

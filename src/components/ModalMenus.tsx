@@ -1,12 +1,13 @@
 import { FC, ReactNode, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import { deleteDoc, doc, setDoc } from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import toast, { Toaster } from "react-hot-toast";
 import { db } from "src/lib/firebase";
 import { MoviesDataState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
 import Mueus from "./Menus";
 import Favorite from "@mui/icons-material/Favorite";
+import { useAuth } from "src/hook/AuthContext";
 
 type Props = {
   props?: ReactNode;
@@ -15,8 +16,12 @@ type Props = {
 const ModalMenus: FC<Props> = ({ props }) => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { user } = useAuth();
+
   const handledelet = async () => {
-    await deleteDoc(doc(db, "movies", `${movies?.id}`));
+    await deleteDoc(
+      doc(db, "movies", user!.uid, "movie", movies?.id.toString()!)
+    );
 
     toast(`${movies?.title || movies?.original_name} 削除`, {
       duration: 2000,
