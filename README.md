@@ -5,7 +5,9 @@
 
 映画を横スクロールする事で他の映画を見ることができます。
 
-再生ボタン　もしくは　画像をクリックするとyoutubeで動画を見ることができます。
+再生ボタン　もしくは　画像をクリックするとモーダルが表示してyoutubeで動画を見ることができます。
+
+モーダルが表示されると☆のマークがあるので、クリックする事でお気に入り●●登録●●　●●削除●●　できます。
 
 動画が再生されない場合もありますが、それはエラーではありません。
 
@@ -26,6 +28,8 @@ tailwind css　https://tailwindcss.com/docs/installation
 Material-UI 　https://mui.com/material-ui/getting-started/installation/
 
 firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
+
+ react-hot-toastでtoast状態　https://react-hot-toast.com/
 
 ### youtube で見えるように
 react-player-npm https://github.com/cookpete/react-player
