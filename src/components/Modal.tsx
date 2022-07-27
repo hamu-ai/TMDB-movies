@@ -9,8 +9,11 @@ import { useRecoilState } from "recoil";
 import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
-import { Toaster } from "react-hot-toast";
 import ModalMenus from "./ModalMenus";
+import { MenuItem } from "@mui/material";
+import { doc, setDoc } from "firebase/firestore";
+import { db } from "src/lib/firebase";
+import toast from "react-hot-toast";
 
 const style = {
   position: "absolute" as "absolute",
@@ -28,6 +31,7 @@ const Modals: FC = () => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [data, setData] = useState("");
   const [muted, setMuted] = useState(false);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleClose = () => setOpen(false);
 
@@ -52,6 +56,21 @@ const Modals: FC = () => {
     WatchVideo();
   }, [movies]);
 
+  const handleAdd = async () => {
+    await setDoc(doc(db, "movies", `${movies?.id}`), {
+      movies,
+    });
+
+    toast(
+      `${movies?.title || movies?.original_name} 
+          登録`,
+      {
+        duration: 2000,
+      }
+    );
+    setAnchorEl(null);
+  };
+
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
@@ -64,11 +83,12 @@ const Modals: FC = () => {
             muted={muted}
             url={`https://www.youtube.com/watch?v=${data}`}
           />
-          <Toaster position="top-left" reverseOrder={false} />
 
           <div className="flex  relative bottom-6 md:bottom-3">
             <div className="relative md:bottom-3 ml-6">
-              <ModalMenus />
+              <ModalMenus
+                props={<MenuItem onClick={handleAdd}>お気に入り登録</MenuItem>}
+              />
             </div>
             <button onClick={() => setMuted(!muted)}>
               {muted === false ? (
