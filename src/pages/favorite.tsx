@@ -28,7 +28,7 @@ const Favorite: NextPage = () => {
       <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10  gap-4  mx-2   ">
         {posts.map((post) => {
           return (
-            <div key={post.id}>
+            <div key={post.id} className="relative">
               <div
                 onClick={() => {
                   setOpen(true);
@@ -48,7 +48,7 @@ const Favorite: NextPage = () => {
                   {post.title || post.original_title}
                 </p>
               </div>
-              <div className="relative bottom-8 left-14 ">
+              <div className="absolute bottom-0 right-0 ">
                 <ModalMenus />
               </div>
             </div>
