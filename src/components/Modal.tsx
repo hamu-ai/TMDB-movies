@@ -10,11 +10,6 @@ import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
 import ModalMenus from "./ModalMenus";
-import { MenuItem } from "@mui/material";
-import { doc, setDoc } from "firebase/firestore";
-import { db } from "src/lib/firebase";
-import toast from "react-hot-toast";
-import { useAuth } from "src/hook/AuthContext";
 
 const style = {
   position: "absolute" as "absolute",
@@ -32,8 +27,6 @@ const Modals: FC = () => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [data, setData] = useState("");
   const [muted, setMuted] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { user } = useAuth();
 
   const handleClose = () => setOpen(false);
 
@@ -58,24 +51,6 @@ const Modals: FC = () => {
     WatchVideo();
   }, [movies]);
 
-  const handleAdd = async () => {
-    await setDoc(
-      doc(db, "movies", user!.uid, "movie", movies?.id.toString()!),
-      {
-        movies,
-      }
-    );
-
-    toast(
-      `${movies?.title || movies?.original_name} 
-          登録`,
-      {
-        duration: 2000,
-      }
-    );
-    setAnchorEl(null);
-  };
-
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
@@ -91,9 +66,7 @@ const Modals: FC = () => {
 
           <div className="flex  relative bottom-6 md:bottom-3">
             <div className="relative md:bottom-3 ml-6">
-              <ModalMenus
-                props={<MenuItem onClick={handleAdd}>お気に入り登録</MenuItem>}
-              />
+              <ModalMenus />
             </div>
             <button onClick={() => setMuted(!muted)}>
               {muted === false ? (
