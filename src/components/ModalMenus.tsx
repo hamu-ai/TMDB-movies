@@ -35,10 +35,7 @@ const ModalMenus: FC = () => {
   }, [db, movies?.id]);
 
   useEffect(
-    () =>
-      setAdd(
-        movie.findIndex((result) => result.title === movies?.title) !== -1
-      ),
+    () => setAdd(movie.findIndex((result) => result.id === movies?.id) !== -1),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [movie]
   );
