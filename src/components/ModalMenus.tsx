@@ -21,7 +21,7 @@ const ModalMenus: FC = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useAuth();
   const [add, setAdd] = useState(false);
-  const [movie, setMovie] = useState<DocumentData[] | Movies[]>([]);
+  const [movie, setMovie] = useState<Movies[]>([]);
 
   useEffect(() => {
     if (user) {
