@@ -9,7 +9,7 @@ import { useRecoilState } from "recoil";
 import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
-import ModalMenus from "./ModalMenus";
+import ModalMenus from "./ModalAddRemove";
 
 const style = {
   position: "absolute" as "absolute",
