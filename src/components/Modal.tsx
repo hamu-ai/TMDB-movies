@@ -30,6 +30,7 @@ const Modals: FC = () => {
 
   const handleClose = () => setOpen(false);
 
+  // 映画●TVのムービー取得してkeyをsetDataに入れる
   useEffect(() => {
     if (!movies) return;
 

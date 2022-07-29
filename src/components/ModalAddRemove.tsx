@@ -23,6 +23,8 @@ const ModalMenus: FC = () => {
   const [add, setAdd] = useState(false);
   const [movie, setMovie] = useState<Movies[]>([]);
 
+  // firestoreのデータ取得
+
   useEffect(() => {
     if (user) {
       const postData = collection(db, "movies", user!.uid, "movie");
@@ -33,6 +35,8 @@ const ModalMenus: FC = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [db, movies?.id]);
+
+  // 取得したデータの有無で　false ture　setAddに入れて返す
 
   useEffect(
     () => setAdd(movie.findIndex((result) => result.id === movies?.id) !== -1),

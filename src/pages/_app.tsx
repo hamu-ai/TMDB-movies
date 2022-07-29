@@ -6,6 +6,7 @@ import Heder from "src/components/Heder";
 import { NextPage } from "next";
 import { ReactElement, ReactNode } from "react";
 
+//　ページごとのレイアウト
 export type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };

@@ -24,6 +24,7 @@ const Home: NextPage<Props> = ({
   popular,
   fetchtrend,
 }) => {
+  //　モーダルを開くたびにレンダリングさせる
   const movieModal = useRecoilValue(MoviesState);
 
   return (

@@ -17,6 +17,7 @@ const Favorite: NextPage = () => {
   const [posts, setPosts] = useState<Movies[]>([]);
   const { user } = useAuth();
 
+  // firestoreのデータ取得
   useEffect(() => {
     if (!user?.uid) return;
     const postData = collection(db, "movies", user!.uid, "movie");
