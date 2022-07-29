@@ -9,33 +9,18 @@ import { Movies } from "src/type";
 
 type Props = {
   post?: Movies;
-  movie?: Movies;
 };
 
-const ScreenFavorites: FC<Props> = ({ post, movie }) => {
+const ScreenFavorites: FC<Props> = ({ post }) => {
   const { user } = useAuth();
   const handle = async () => {
     await deleteDoc(
-      doc(
-        db,
-        "movies",
-        user!.uid,
-        "movie",
-        post?.id.toString()! || movie?.id.toString()!
-      )
+      doc(db, "movies", user!.uid, "movie", post?.id.toString()!)
     );
 
-    toast(
-      `${
-        post?.title ||
-        post?.original_name ||
-        movie?.title ||
-        movie?.original_name
-      } 削除`,
-      {
-        duration: 2000,
-      }
-    );
+    toast(`${post?.title || post?.original_name} 削除`, {
+      duration: 2000,
+    });
   };
 
   return (
