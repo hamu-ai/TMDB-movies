@@ -30,7 +30,7 @@ const Nav = () => {
   return (
     <div className="flex flex-1 gap-x-7  ">
       <Link href="/">
-        <h1 className="font-bold text-2xl cursor-pointer ">Movies</h1>
+        <h1 className="font-bold text-2xl cursor-pointer">Movies</h1>
       </Link>
       <div className="flex  mt-2 ">
         {menu === false ? (
