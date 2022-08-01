@@ -16,6 +16,9 @@ export type Movies = {
   poster_path: string;
   vote_average: number;
   vote_count: number;
+  languages: string;
+  seasons: [];
+  homepage: string;
 };
 
 export type Element = {
