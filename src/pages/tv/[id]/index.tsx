@@ -7,7 +7,7 @@ import { Movies } from "src/type";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import TvIds from "src/components/TV";
-import TvMap from "src/components/TV/Tvmap";
+import TvMap from "src/components/TV/TvMap";
 
 const Tvmovies: NextPage = () => {
   const TV = useRecoilValue(MoviesState);
