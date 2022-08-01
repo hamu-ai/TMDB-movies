@@ -34,11 +34,17 @@ const Nav = () => {
       </Link>
       <div className="flex  mt-2 ">
         {menu === false ? (
-          <Link href="/favorite">
-            <h1 className="text-red-700 font-bold cursor-pointer ">
-              お気に入り一覧
-            </h1>
-          </Link>
+          <div className="flex gap-x-2">
+            <Link href="/tv/1">
+              <h1 className="text-red-700 font-bold cursor-pointer ">TV</h1>
+            </Link>
+
+            <Link href="/favorite">
+              <h1 className="text-red-700 font-bold cursor-pointer ">
+                お気に入り一覧
+              </h1>
+            </Link>
+          </div>
         ) : (
           <>
             <IconButton
@@ -61,6 +67,11 @@ const Nav = () => {
                 "aria-labelledby": "basic-button",
               }}
             >
+              <MenuItem onClick={handleClose}>
+                <Link href={"/tv"}>
+                  <p> TV</p>
+                </Link>
+              </MenuItem>
               <MenuItem onClick={handleClose}>
                 <Link href="favorite">
                   <p> お気に入り一覧</p>
