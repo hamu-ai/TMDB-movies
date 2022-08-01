@@ -1,16 +1,13 @@
 import { Pagination, Stack } from "@mui/material";
-import Image from "next/image";
 
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
-
 import { NextPage } from "next";
-
 import { useRouter } from "next/router";
 import TvIds from "src/components/TV";
-import { TvMap } from "src/components/TV/TVmap";
+import { Tvmap } from "src/components/TV/TVmap";
 
 const Tvmovies: NextPage = () => {
   const TV = useRecoilValue(MoviesState);
@@ -39,7 +36,7 @@ const Tvmovies: NextPage = () => {
     <div>
       <div className="relative top-16  grid  gap-2  sm:grid-cols-2  md:grid-cols-4 lg:grid-cols-5  ">
         {container.map((tv) => (
-          <TvMap key={tv.id} tv={tv} />
+          <Tvmap key={tv.id} tv={tv} />
         ))}
         <Stack spacing={2}>
           <Pagination
