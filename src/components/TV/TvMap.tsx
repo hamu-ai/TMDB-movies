@@ -8,7 +8,7 @@ type Props = {
   tv: Movies;
 };
 
-export const Tvmap: FC<Props> = ({ tv }) => {
+const TvMap: FC<Props> = ({ tv }) => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [open, setOpen] = useRecoilState(MoviesState);
   return (
@@ -35,3 +35,5 @@ export const Tvmap: FC<Props> = ({ tv }) => {
     </div>
   );
 };
+
+export default TvMap;
