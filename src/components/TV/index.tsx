@@ -81,47 +81,36 @@ const TvIds: FC = () => {
                   )}
                 </button>
               </div>
-              <div className="relative  bottom-5">
-                <h1 className="ml-4  lg:text-xl mb-2 ">{movies?.title}</h1>
-                <div className="flex gap-x-3 ml-4">
-                  <p>{movies?.original_name}</p>
-                  <p>評価{movies?.vote_average}</p>
-                </div>
-                <div>
-                  <Link href={home} target="_blank">
-                    <p className=" ml-4 text-red-500 hover:text-red-700">
-                      ホームページ
-                    </p>
-                  </Link>
-                </div>
-                <p className="text-xs lg:text-lg lg:max-w-none max-w-sm ml-4 ">
-                  {movies?.overview}
-                </p>
-              </div>
             </>
           ) : (
-            <div className="pl-4 text-center ">
-              <Link href={home} target="_blank">
-                <p className=" mb-2 text-white">ホームページ</p>
-              </Link>
-              <div className="relative w-full  p-20 mt-7   mb-10">
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${
-                    movies?.poster_path || movies?.backdrop_path
-                  }`}
-                  className="rounded-sm object-contain    transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
-                  layout="fill"
-                  alt="error"
-                />
-              </div>
-              <div className="mt-3 ">
-                <p className="mb-3">{movies?.name}</p>
-                <p className="text-xs lg:text-lg lg:max-w-none max-w-sm  ">
-                  {movies?.overview}
-                </p>
-              </div>
+            <div className="relative w-full  p-20 mt-7   mb-10">
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${
+                  movies?.poster_path || movies?.backdrop_path
+                }`}
+                className="rounded-sm object-contain    transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                layout="fill"
+                alt="error"
+              />
             </div>
           )}
+          <div className="relative  bottom-5">
+            <h1 className="ml-4  lg:text-xl mb-2 ">{movies?.title}</h1>
+            <div className="flex gap-x-3 ml-4">
+              <p>{movies?.original_name}</p>
+              <p>評価{movies?.vote_average}</p>
+            </div>
+            <div>
+              <Link href={home} target="_blank">
+                <p className=" ml-4 text-red-500 hover:text-red-700">
+                  ホームページ
+                </p>
+              </Link>
+            </div>
+            <p className="text-xs lg:text-lg lg:max-w-none max-w-sm ml-4 ">
+              {movies?.overview}
+            </p>
+          </div>
         </Box>
       </MuiModal>
     </div>
