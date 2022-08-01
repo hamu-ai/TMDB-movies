@@ -30,7 +30,7 @@ const Modals: FC = () => {
 
   const handleClose = () => setOpen(false);
 
-  // 映画●TVのムービー取得してkeyをsetDataに入れる
+  // 映画●のムービー取得してkeyをsetDataに入れる
   useEffect(() => {
     if (!movies) return;
 
@@ -38,10 +38,11 @@ const Modals: FC = () => {
       const data = await fetch(
         `${URL}/${movies?.media_type === "tv" ? "tv" : "movie"}/${
           movies?.id
-        }?api_key=${
-          process.env.NEXT_PUBLIC_API_KEY
-        }&language=en-US&append_to_response=videos`
+        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${
+          movies?.original_language
+        }&append_to_response=videos`
       ).then((res) => res.json());
+
       if (data.videos) {
         const index = data.videos.results.findIndex(
           (element: Element) => element.type === "Trailer"
