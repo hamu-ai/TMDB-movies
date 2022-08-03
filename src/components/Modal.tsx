@@ -10,6 +10,7 @@ import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
 import ModalMenus from "./ModalAddRemove";
+import Image from "next/image";
 
 const style = {
   position: "absolute" as "absolute",
@@ -36,11 +37,7 @@ const Modals: FC = () => {
 
     const WatchVideo = async () => {
       const data = await fetch(
-        `${URL}/${movies?.media_type === "tv" ? "tv" : "movie"}/${
-          movies?.id
-        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${
-          movies?.original_language
-        }&append_to_response=videos`
+        `${URL}/movie/${movies?.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${movies?.original_language}&append_to_response=videos`
       ).then((res) => res.json());
 
       if (data.videos) {
@@ -56,28 +53,47 @@ const Modals: FC = () => {
   return (
     <div>
       <MuiModal open={open} onClose={handleClose}>
-        <Box sx={style} className="md:w-[60vh] w-full mx-auto bg-black  mt-4 ">
-          <Clear onClick={() => setOpen(false)} className="ml-4" />
-          <ReactPlayer
-            width={"100%"}
-            height={300}
-            playing
-            muted={muted}
-            url={`https://www.youtube.com/watch?v=${data}`}
-          />
+        <Box
+          sx={style}
+          className="md:w-[60vh] w-full relative mx-auto bg-black  mt-4 "
+        >
+          <Clear onClick={() => setOpen(false)} className=" absolute right-2" />
+          {data && (
+            <>
+              <ReactPlayer
+                width={"100%"}
+                height={300}
+                playing
+                muted={muted}
+                url={`https://www.youtube.com/watch?v=${data}`}
+              />
 
-          <div className="flex  relative bottom-6 md:bottom-3">
-            <div className="relative md:bottom-3 ml-6">
-              <ModalMenus />
+              <div className="flex  relative bottom-6 md:bottom-3">
+                <div className="relative md:bottom-3 ml-6">
+                  <ModalMenus />
+                </div>
+                <button onClick={() => setMuted(!muted)}>
+                  {muted === false ? (
+                    <VolumeUp className=" relative md:bottom-3 left-12" />
+                  ) : (
+                    <VolumeOff className="  relative md:bottom-3 left-12 " />
+                  )}
+                </button>
+              </div>
+            </>
+          )}
+          {!data && (
+            <div className="relative w-full  p-20 mt-7   mb-10">
+              <Image
+                src={`https://image.tmdb.org/t/p/w500${
+                  movies?.poster_path || movies?.backdrop_path
+                }`}
+                className="rounded-sm object-contain    transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                layout="fill"
+                alt="error"
+              />
             </div>
-            <button onClick={() => setMuted(!muted)}>
-              {muted === false ? (
-                <VolumeUp className=" relative md:bottom-3 left-12" />
-              ) : (
-                <VolumeOff className="  relative md:bottom-3 left-12 " />
-              )}
-            </button>
-          </div>
+          )}
           <div className="relative  bottom-5">
             <h1 className="ml-4  lg:text-xl mb-2 ">{movies?.title}</h1>
             <div className="flex gap-x-3 ml-4">

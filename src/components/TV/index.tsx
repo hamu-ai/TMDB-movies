@@ -56,9 +56,9 @@ const TvIds: FC = () => {
     <div>
       <MuiModal open={open} onClose={handleClose}>
         <Box sx={style} className="md:w-[60vh] w-full mx-auto bg-black  mt-4 ">
-          <Clear onClick={() => setOpen(false)} className="ml-4" />
+          <Clear onClick={() => setOpen(false)} className="absolute right-4" />
 
-          {data ? (
+          {data && (
             <>
               <ReactPlayer
                 width={"100%"}
@@ -82,7 +82,8 @@ const TvIds: FC = () => {
                 </button>
               </div>
             </>
-          ) : (
+          )}
+          {!data && (
             <div className="relative w-full  p-20 mt-7   mb-10">
               <Image
                 src={`https://image.tmdb.org/t/p/w500${
