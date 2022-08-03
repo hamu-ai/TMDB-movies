@@ -3,6 +3,8 @@ import IconButton from "@mui/material/IconButton";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import BookmarkAdd from "@mui/icons-material/BookmarkAdd";
+import HomeIcon from "@mui/icons-material/Home";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
@@ -19,7 +21,7 @@ const Nav = () => {
   useEffect(() => {
     window.addEventListener("resize", () => {
       const dd = window.outerWidth;
-      if (dd < 630) {
+      if (dd < 570) {
         setMenu(true);
       } else {
         setMenu(false);
@@ -28,7 +30,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 gap-x-7  ">
+    <div className="flex flex-1 gap-x-7   ">
       <Link href="/">
         <h1 className="font-bold text-2xl cursor-pointer">Movies</h1>
       </Link>
@@ -36,12 +38,16 @@ const Nav = () => {
         {menu === false ? (
           <div className="flex gap-x-2">
             <Link href="/tv/1">
-              <h1 className="text-red-700 font-bold cursor-pointer ">TV</h1>
+              <h1 className="text-white font-bold cursor-pointer ">TV</h1>
+            </Link>
+
+            <Link href="/Search">
+              <h1 className="text-white font-bold cursor-pointer ">検索</h1>
             </Link>
 
             <Link href="/favorite">
-              <h1 className="text-red-700 font-bold cursor-pointer ">
-                お気に入り一覧
+              <h1 className="text-red-700 font-bold cursor-pointer  ">
+                <BookmarkAdd />
               </h1>
             </Link>
           </div>
@@ -68,16 +74,25 @@ const Nav = () => {
               }}
             >
               <MenuItem onClick={handleClose}>
-                <Link href={"/tv"}>
+                <Link href="/tv/1">
                   <p> TV</p>
                 </Link>
               </MenuItem>
               <MenuItem onClick={handleClose}>
-                <Link href="favorite">
-                  <p> お気に入り一覧</p>
+                <Link href="/Search">
+                  <p> 検索</p>
                 </Link>
               </MenuItem>
-              <MenuItem onClick={handleClose}>ホーム</MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link href="favorite">
+                  <BookmarkAdd />
+                </Link>
+              </MenuItem>
+              <MenuItem onClick={handleClose}>
+                <Link href="/">
+                  <HomeIcon color="warning" />
+                </Link>
+              </MenuItem>
             </Menu>
           </>
         )}
