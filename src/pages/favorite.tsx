@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { collection, getDocs } from "firebase/firestore";
+import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "src/lib/firebase";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState, useRecoilValue } from "recoil";
@@ -23,7 +23,10 @@ const Favorite: NextPage = () => {
     const postData = collection(db, "movies", user!.uid, "movie");
     getDocs(postData).then((snapShot) => {
       setPosts(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
-      console.log(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
+    });
+    // リアルタイムでデータ取得
+    onSnapshot(postData, (post) => {
+      setPosts(post.docs.map((doc) => ({ ...doc.data().movies })));
     });
   }, [user]);
 
