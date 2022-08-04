@@ -22,7 +22,7 @@ const TvMap: FC<Props> = ({ tv }) => {
       <p className="absolute top-0   text-sm md:text-base lg:text-md">
         {tv.name}
       </p>
-      <div className="relative   p-20 mt-7   mb-10">
+      <div className="relative   p-20 my-7   ">
         <Image
           src={`https://image.tmdb.org/t/p/w500${
             tv.backdrop_path || tv.poster_path
