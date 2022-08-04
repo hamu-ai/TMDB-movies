@@ -7,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { MoviesDataState, MoviesState, SearchState } from "src/atom/MovieState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TvIds from "src/components/TV";
+import Modals from "./Modal";
 
 type Props = {
   lookup: string;
@@ -120,7 +121,11 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
           );
         })}
       </div>
-      {TV && <TvIds />}
+      {search === true ? (
+        <div>{TV && <TvIds />}</div>
+      ) : (
+        <div>{TV && <Modals />}</div>
+      )}
     </div>
   );
 };
