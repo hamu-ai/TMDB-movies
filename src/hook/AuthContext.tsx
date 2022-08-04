@@ -71,8 +71,8 @@ const AuthProvider = ({ children }: Child) => {
         setLoading(false);
         // ...
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        alert("メールアドレスとパスワード６桁以上入力してください。");
       });
   };
 
@@ -85,8 +85,8 @@ const AuthProvider = ({ children }: Child) => {
         router.push("/");
         setLoading(false);
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        alert("メールアドレスとパスワード６桁以上入力してください。");
       });
   };
 
