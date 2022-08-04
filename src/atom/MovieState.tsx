@@ -10,3 +10,8 @@ export const MoviesDataState = atom<Movies | null>({
   key: "MoviesDataState",
   default: null,
 });
+
+export const SearchState = atom({
+  key: "SearchState",
+  default: true,
+});
