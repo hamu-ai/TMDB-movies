@@ -1,29 +1,36 @@
-import { FC } from "react";
-import { Button, TextField } from "@mui/material";
+import { ComponentProps, FC } from "react";
+import { TextField } from "@mui/material";
 import Image from "next/image";
-import { MouseEventHandler, useState } from "react";
+import { useState } from "react";
 import { Movies } from "src/type";
 import SearchIcon from "@mui/icons-material/Search";
 import { MoviesDataState, MoviesState, SearchState } from "src/atom/MovieState";
-import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import TvIds from "src/components/TV";
 
-const TvSearch: FC = () => {
+type Props = {
+  lookup: string;
+  title: string;
+};
+
+const TvSearch: FC<Props> = ({ lookup, title }) => {
   const TV = useRecoilValue(MoviesState);
 
   const [text, setText] = useState("");
   const [show, setShow] = useState<Movies[]>([]);
-  const setSearch = useSetRecoilState(SearchState);
+  const [search, setSearch] = useRecoilState(SearchState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [open, setOpen] = useRecoilState(MoviesState);
+  const [page, setPage] = useState(1);
 
-  // TVのデータを発見できるAPI
+  const [type, setType] = useState();
+  // TV　movie のデータを発見できるAPI
 
-  const fetchSearch: MouseEventHandler = async (e) => {
+  const fetchSearch: ComponentProps<"button">["onChange"] = async (e) => {
     e.preventDefault();
     try {
       const data = await fetch(
-        `https://api.themoviedb.org/3/search/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&query=${text}`
+        `https://api.themoviedb.org/3/search/${lookup}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&query=${text}&page=${page}`
       );
       const res = await data.json();
 
@@ -32,18 +39,41 @@ const TvSearch: FC = () => {
       console.log(error);
     }
   };
+
   return (
     <div className="h-screen relative top-10   ">
-      <p className="text-center font-bold text-xl relative top-3">TV検索</p>
-      <div className="relative top-7 flex justify-center gap-x-6">
-        <Button variant="text" onClick={() => setSearch(false)}>
-          映画検索
-        </Button>
+      <div className="flex justify-center  gap-x-5">
+        <button>
+          <p
+            className={`${
+              search === true
+                ? "text-blue-300 px-4  font-bold text-4xl relative top-3"
+                : "  px-4 font-bold text-1xl relative top-3"
+            } `}
+            onClick={() => setSearch(true)}
+          >
+            TV
+          </p>
+        </button>
 
+        <button>
+          <p
+            className={`${
+              search === false
+                ? "text-blue-300  px-4  font-bold  text-4xl relative top-3"
+                : "  px-4 font-bold text-1xl relative top-3"
+            } `}
+            onClick={() => setSearch(false)}
+          >
+            映画
+          </p>
+        </button>
+      </div>
+      <div className="relative top-7 flex justify-center gap-x-6">
         <form className="flex justify-center">
           <TextField
             id="outlined-helperText"
-            label="TV"
+            label={`${title} 検索`}
             className="bg-white"
             onChange={(e) => setText(e.target.value)}
           />
