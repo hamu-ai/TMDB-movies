@@ -1,7 +1,7 @@
 import { NextPage } from "next";
 import { SearchState } from "src/atom/MovieState";
 import { useRecoilValue } from "recoil";
-import TvSearch from "src/components/TvSearch";
+import TvSearch from "src/components/Search";
 
 import { Toaster } from "react-hot-toast";
 
