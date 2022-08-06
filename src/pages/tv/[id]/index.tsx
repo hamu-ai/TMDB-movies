@@ -33,7 +33,7 @@ const Tvmovies: NextPage = () => {
   return (
     <div>
       <div className="relative top-10">
-        <div className="relative top-16  grid  gap-2  sm:grid-cols-2  md:grid-cols-4 lg:grid-cols-5  ">
+        <div className="relative top-16  TVgrid ">
           {show.map((tv) => (
             <TvMap key={tv.id} tv={tv} />
           ))}

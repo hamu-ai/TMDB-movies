@@ -32,7 +32,7 @@ const Favorite: NextPage = () => {
 
   return (
     <div className="relative top-20 ">
-      <div className="grid grid-cols-3 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10  gap-4  mx-2   ">
+      <div className=" Favorite gap-4  mx-2   ">
         {posts.map((post) => {
           return (
             <div key={post.id} className="relative">

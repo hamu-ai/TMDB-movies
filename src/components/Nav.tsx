@@ -38,11 +38,11 @@ const Nav = () => {
         {menu === false ? (
           <div className="flex gap-x-2">
             <Link href="/tv/1">
-              <h1 className="text-white font-bold cursor-pointer ">TV</h1>
+              <h1 className="NavText ">TV</h1>
             </Link>
 
             <Link href="/Search">
-              <h1 className="text-white font-bold cursor-pointer ">検索</h1>
+              <h1 className="NavText ">検索</h1>
             </Link>
 
             <Link href="/favorite">

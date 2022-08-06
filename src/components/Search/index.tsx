@@ -52,7 +52,7 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
           <p
             className={`${
               search === true
-                ? "text-blue-300 px-4  font-bold text-4xl relative top-3"
+                ? "text-blue-300 px-4 SearcTrue "
                 : "  px-4 font-bold text-1xl relative top-3"
             } `}
             onClick={() => setSearch(true)}
@@ -65,7 +65,7 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
           <p
             className={`${
               search === false
-                ? "text-blue-300  px-4  font-bold  text-4xl relative top-3"
+                ? "text-blue-300  px-4 SearcTrue "
                 : "  px-4 font-bold text-1xl relative top-3"
             } `}
             onClick={() => setSearch(false)}
@@ -105,7 +105,7 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
         </Stack>
       </div>
 
-      <div className="relative top-14   grid  grid-cols-2  sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-5 xl:grid-cols-6  gap-5  mx-2">
+      <div className="relative top-14   Searchgrid  gap-5  mx-2">
         {show?.map((shows) => (
           <SearcMap key={shows.id} shows={shows} />
         ))}

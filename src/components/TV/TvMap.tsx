@@ -17,7 +17,7 @@ const TvMap: FC<Props> = ({ tv }) => {
         setMovies(tv);
         setOpen(true);
       }}
-      className="relative px-6 border  border-white bg-gray-500 hover:bg-black  transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
+      className="relative px-6 border  border-white bg-gray-500 hover:bg-black  Transition "
     >
       <p className="absolute top-0   text-sm md:text-base lg:text-md">
         {tv.name}

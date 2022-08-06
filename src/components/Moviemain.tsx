@@ -68,7 +68,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                 src={`https://image.tmdb.org/t/p/w500${
                   movies.backdrop_path || movies.poster_path
                 }`}
-                className="rounded-sm object-cover  transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                className="rounded-sm object-cover  Transition "
                 layout="fill"
                 alt="error"
               />
@@ -78,7 +78,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
         {left ? (
           <ArrowBackIos
             onClick={() => handleClick("left")}
-            className="absolute left-5 mt-8  md:mt-16 md:ml-2 transition hover:-translate-y-1 hover:scale-110 cursor-pointer"
+            className="absolute left-5 mt-8  md:mt-16 md:ml-2 Transition"
             sx={{
               "@media screen and (min-width:765px)": {
                 fontSize: 40,
@@ -90,7 +90,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
         {right ? (
           <ArrowForwardIosIcon
             onClick={() => handleClick("right")}
-            className="absolute right-5 mt-8 md:mt-16 md:mr-2   transition hover:-translate-y-1 hover:scale-110 cursor-pointer"
+            className="absolute right-5 mt-8 md:mt-16 md:mr-2   Transition"
             sx={{
               "@media screen and (min-width:765px)": {
                 fontSize: 40,

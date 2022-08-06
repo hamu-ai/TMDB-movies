@@ -7,3 +7,26 @@
     @apply bg-black text-white;
   }
 }
+
+@layer components {
+  .Searchgrid {
+    @apply grid  grid-cols-2  sm:grid-cols-3 md:grid-cols-4  xl:grid-cols-5;
+  }
+
+  .Favorite {
+    @apply grid grid-cols-3 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10;
+  }
+
+  .TVgrid {
+    @apply grid  gap-2  sm:grid-cols-2  md:grid-cols-4 lg:grid-cols-5;
+  }
+  .NavText {
+    @apply text-white font-bold cursor-pointer;
+  }
+  .Transition {
+    @apply transition hover:-translate-y-1 hover:scale-110 cursor-pointer;
+  }
+  .SearcTrue {
+    @apply font-bold text-4xl relative top-3;
+  }
+}

@@ -88,7 +88,7 @@ const Modals: FC = () => {
                 src={`https://image.tmdb.org/t/p/w500${
                   movies?.poster_path || movies?.backdrop_path
                 }`}
-                className="rounded-sm object-contain    transition hover:-translate-y-1 hover:scale-110 cursor-pointer "
+                className="rounded-sm object-contain    Transition "
                 layout="fill"
                 alt="error"
               />
