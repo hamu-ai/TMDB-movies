@@ -31,12 +31,14 @@ const Tvmovies: NextPage = () => {
   }, [page]);
 
   return (
-    <div>
+    <div className="h-[95vh]">
       <div className="relative top-10">
         <div className="relative top-16  TVgrid ">
           {show.map((tv) => (
             <TvMap key={tv.id} tv={tv} />
           ))}
+        </div>
+        <div className="mt-14">
           <Stack spacing={2}>
             <Pagination
               count={20}
