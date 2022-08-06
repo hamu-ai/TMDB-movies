@@ -3,7 +3,6 @@ import {
   collection,
   deleteDoc,
   doc,
-  DocumentData,
   getDocs,
   setDoc,
 } from "firebase/firestore";
@@ -16,7 +15,11 @@ import Favorite from "@mui/icons-material/Favorite";
 import { useAuth } from "src/hook/AuthContext";
 import { Movies } from "src/type";
 
-const ModalMenus: FC = () => {
+type Props = {
+  post?: Movies;
+};
+
+const ModalMenus: FC<Props> = ({ post }) => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useAuth();
@@ -30,16 +33,21 @@ const ModalMenus: FC = () => {
       const postData = collection(db, "movies", user!.uid, "movie");
       getDocs(postData).then((snapShot) => {
         setMovie(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
-        console.log(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [db, movies?.id]);
+  }, [db, movies?.id, post?.id]);
 
   // 取得したデータの有無で　false ture　setAddに入れて返す
 
   useEffect(
-    () => setAdd(movie.findIndex((result) => result.id === movies?.id) !== -1),
+    () =>
+      setAdd(
+        movie.findIndex(
+          (result) => result.id === movies?.id || result.id === post?.id
+        ) !== -1
+      ),
+    // result.id === movies?.id || post?.id
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [movie]
   );
@@ -47,24 +55,49 @@ const ModalMenus: FC = () => {
   const handleList = async () => {
     if (add) {
       await deleteDoc(
-        doc(db, "movies", user!.uid, "movie", movies?.id.toString()!)
+        doc(
+          db,
+          "movies",
+          user!.uid,
+          "movie",
+          movies?.id.toString()! || post?.id.toString()!
+        )
       );
 
-      toast(`${movies?.title || movies?.original_name} 削除`, {
-        duration: 2000,
-      });
+      toast(
+        `${
+          movies?.title ||
+          movies?.original_name ||
+          post?.title ||
+          post?.original_name
+        } 削除`,
+        {
+          duration: 2000,
+        }
+      );
       setAnchorEl(null);
       setAdd(false);
     } else {
       await setDoc(
-        doc(db, "movies", user!.uid, "movie", movies?.id.toString()!),
+        doc(
+          db,
+          "movies",
+          user!.uid,
+          "movie",
+          movies?.id.toString()! || post?.id.toString()!
+        ),
         {
-          movies,
+          movies: movies || post,
         }
       );
 
       toast(
-        `${movies?.title || movies?.original_name} 
+        `${
+          movies?.title ||
+          movies?.original_name ||
+          post?.title ||
+          post?.original_name
+        } 
           登録`,
         {
           duration: 2000,
@@ -78,9 +111,13 @@ const ModalMenus: FC = () => {
     <div>
       <button onClick={handleList}>
         {add ? (
-          <Favorite color="warning" className="h-7 w-7" />
+          <Favorite color="warning" className="h-7 w-7" fontSize="large" />
         ) : (
-          <FavoriteBorder color="warning" className="h-7 w-7" />
+          <FavoriteBorder
+            color="warning"
+            className="h-7 w-7"
+            fontSize="large"
+          />
         )}
       </button>
     </div>
