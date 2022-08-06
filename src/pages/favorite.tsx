@@ -15,6 +15,7 @@ const Favorite: NextPage = () => {
   const [open, setOpen] = useRecoilState(MoviesState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [posts, setPosts] = useState<Movies[]>([]);
+  const [post, setPost] = useState<Movies[]>([]);
   const { user } = useAuth();
 
   // firestoreのデータ取得
@@ -52,7 +53,7 @@ const Favorite: NextPage = () => {
                   alt="error"
                 />
                 <p className="absolute top-0 bg-opacity-50 bg-black w-full text-sm ">
-                  {post.title || post.original_title}
+                  {post.title || post.original_title || post.name}
                 </p>
               </div>
               <div className="absolute bottom-0 right-0 ">
