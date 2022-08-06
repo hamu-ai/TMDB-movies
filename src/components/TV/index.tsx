@@ -85,14 +85,16 @@ const TvIds: FC = () => {
           )}
           {!data && (
             <div className="relative w-full  p-20 mt-7   mb-10">
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${
-                  movies?.poster_path || movies?.backdrop_path
-                }`}
-                className="rounded-sm object-contain    Transition "
-                layout="fill"
-                alt="error"
-              />
+              {movies?.poster_path || movies?.backdrop_path ? (
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${
+                    movies?.poster_path || movies?.backdrop_path
+                  }`}
+                  className="rounded-sm object-contain    Transition "
+                  layout="fill"
+                  alt="error"
+                />
+              ) : null}
             </div>
           )}
           <div className="relative  bottom-5">
