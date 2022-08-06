@@ -4,11 +4,10 @@ import { FC, ReactNode, useState } from "react";
 type Props = {
   props: ReactNode;
   Icons?: ReactNode;
-  data?: ReactNode;
   style?: ReactNode;
 };
 
-const Mueus: FC<Props> = ({ props, Icons, data, style }) => {
+const Mueus: FC<Props> = ({ props, Icons, style }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -26,7 +25,7 @@ const Mueus: FC<Props> = ({ props, Icons, data, style }) => {
         aria-haspopup="true"
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
-        className={`!text-white !text-sm  !font-bold ${style}`}
+        className={`!text-white  ${style}`}
       >
         {Icons}
       </Button>
@@ -41,7 +40,6 @@ const Mueus: FC<Props> = ({ props, Icons, data, style }) => {
         onClick={() => setAnchorEl(null)}
       >
         {props}
-        {data}
       </Menu>
     </div>
   );
