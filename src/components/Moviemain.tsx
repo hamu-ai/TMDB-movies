@@ -5,6 +5,7 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
+import ModalMenus from "./ModalAddRemove";
 type Props = {
   title?: string;
   movie: Movies[];
@@ -56,22 +57,26 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
       >
         {movie.map((movies) => {
           return (
-            <div
-              onClick={() => {
-                setOpen(true);
-                setMovies(movies);
-              }}
-              key={movies.id}
-              className="relative md:h-40 mx-1 md:w-screen md:px-20 h-20 w-20  px-20  "
-            >
-              <Image
-                src={`https://image.tmdb.org/t/p/w500${
-                  movies.backdrop_path || movies.poster_path
-                }`}
-                className="rounded-sm object-cover  Transition "
-                layout="fill"
-                alt="error"
-              />
+            <div key={movies.id} className="mx-1 relative">
+              <div
+                onClick={() => {
+                  setOpen(true);
+                  setMovies(movies);
+                }}
+                className="relative md:h-40   md:px-20 h-20 w-20  px-20  "
+              >
+                <Image
+                  src={`https://image.tmdb.org/t/p/w500${
+                    movies.backdrop_path || movies.poster_path
+                  }`}
+                  className="rounded-sm object-cover  Transition "
+                  layout="fill"
+                  alt="error"
+                />
+              </div>
+              <div className="absolute right-0 top-0">
+                <ModalMenus post={movies} />
+              </div>
             </div>
           );
         })}
