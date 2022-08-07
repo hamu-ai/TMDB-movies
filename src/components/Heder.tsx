@@ -8,12 +8,6 @@ import Logout from "@mui/icons-material/Logout";
 const Heder: FC = () => {
   const { singOut } = useAuth();
   const [isScroll, setScroll] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-
-  const handlLogout = () => {
-    singOut();
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -34,7 +28,9 @@ const Heder: FC = () => {
       <Mueus
         style={"!bg-blue-600  hover:!bg-blue-400"}
         Icons={<Logout fontSize="small" />}
-        props={<MenuItem onClick={handlLogout}>ログアウトしますか？</MenuItem>}
+        props={
+          <MenuItem onClick={() => singOut()}>ログアウトしますか？</MenuItem>
+        }
       />
     </div>
   );

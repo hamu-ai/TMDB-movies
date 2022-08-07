@@ -21,7 +21,6 @@ type Props = {
 
 const ModalMenus: FC<Props> = ({ post }) => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { user } = useAuth();
   const [add, setAdd] = useState(false);
   const [movie, setMovie] = useState<Movies[]>([]);
@@ -47,7 +46,6 @@ const ModalMenus: FC<Props> = ({ post }) => {
           (result) => result.id === movies?.id || result.id === post?.id
         ) !== -1
       ),
-    // result.id === movies?.id || post?.id
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [movie]
   );
@@ -75,7 +73,6 @@ const ModalMenus: FC<Props> = ({ post }) => {
           duration: 2000,
         }
       );
-      setAnchorEl(null);
       setAdd(false);
     } else {
       await setDoc(
@@ -103,7 +100,7 @@ const ModalMenus: FC<Props> = ({ post }) => {
           duration: 2000,
         }
       );
-      setAnchorEl(null);
+
       setAdd(true);
     }
   };
