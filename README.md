@@ -16,7 +16,7 @@ TVのページはTVを見ることができます。
 
 
 ###  Vercel
-https://tmdb-movies-2zj2lbjs1-hamu-ai.vercel.app/
+https://tmdb-movies-hcxqvskii-hamu-ai.vercel.app/
 
 ### 状態管理ライブラリー
 Recoil https://recoiljs.org/
