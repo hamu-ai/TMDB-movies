@@ -9,6 +9,7 @@ import Image from "next/image";
 import Modals from "src/components/Modal";
 import { useAuth } from "src/hook/AuthContext";
 import ModalMenus from "src/components/ModalAddRemove";
+import { Toaster } from "react-hot-toast";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
@@ -33,6 +34,7 @@ const Favorite: NextPage = () => {
 
   return (
     <div className="relative top-20 ">
+      <Toaster position="top-center" reverseOrder={false} />
       <div className=" Favorite gap-4  mx-2   ">
         {posts.map((post) => {
           return (
