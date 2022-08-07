@@ -8,7 +8,7 @@ import { Movies } from "src/type";
 import Image from "next/image";
 import Modals from "src/components/Modal";
 import { useAuth } from "src/hook/AuthContext";
-import ScreenFavorites from "src/components/ScreenFavorites";
+import ModalMenus from "src/components/ModalAddRemove";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
@@ -57,7 +57,7 @@ const Favorite: NextPage = () => {
                 </p>
               </div>
               <div className="absolute bottom-0 right-0 ">
-                <ScreenFavorites post={post} />
+                <ModalMenus post={post} />
               </div>
             </div>
           );
