@@ -100,7 +100,6 @@ const ModalMenus: FC<Props> = ({ post }) => {
           duration: 2000,
         }
       );
-
       setAdd(true);
     }
   };
