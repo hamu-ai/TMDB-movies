@@ -1,4 +1,4 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 import { Movies } from "src/type";
 
 export const MoviesState = atom({
@@ -14,4 +14,22 @@ export const MoviesDataState = atom<Movies | null>({
 export const SearchState = atom({
   key: "SearchState",
   default: true,
+});
+
+export const SearchDeliberation = selector({
+  key: "SearchDeliberation",
+  get: ({ get }) => {
+    const filter = get(SearchState);
+
+    switch (filter) {
+      case true:
+        return { title: "TV", lookup: "tv" };
+
+      case false:
+        return { title: "映画", lookup: "movie" };
+
+      default:
+        null;
+    }
+  },
 });

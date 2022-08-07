@@ -3,18 +3,18 @@ import { Pagination, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { Movies } from "src/type";
 import SearchIcon from "@mui/icons-material/Search";
-import { MoviesState, SearchState } from "src/atom/MovieState";
+import {
+  MoviesState,
+  SearchDeliberation,
+  SearchState,
+} from "src/atom/MovieState";
 import { useRecoilState, useRecoilValue } from "recoil";
 import TvIds from "src/components/TV";
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
 
-type Props = {
-  lookup: string;
-  title: string;
-};
-
-const TvSearch: FC<Props> = ({ lookup, title }) => {
+const TvSearch: FC = () => {
+  const deliberation = useRecoilValue(SearchDeliberation);
   const TV = useRecoilValue(MoviesState);
 
   const [text, setText] = useState("鬼滅");
@@ -29,7 +29,7 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
   const fetchSearch = async () => {
     try {
       const data = await fetch(
-        `https://api.themoviedb.org/3/search/${lookup}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&query=${text}&page=${page}`
+        `https://api.themoviedb.org/3/search/${deliberation?.lookup}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&query=${text}&page=${page}`
       );
       const res = await data.json();
 
@@ -78,7 +78,7 @@ const TvSearch: FC<Props> = ({ lookup, title }) => {
         <div className="flex justify-center">
           <TextField
             id="outlined-helperText"
-            label={`${title} 検索`}
+            label={`${deliberation?.title} 検索`}
             className="bg-white"
             onChange={(e) => setText(e.target.value)}
           />
