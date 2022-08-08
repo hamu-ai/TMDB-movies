@@ -8,15 +8,14 @@ import { Movies } from "src/type";
 import Image from "next/image";
 import Modals from "src/components/Modal";
 import { useAuth } from "src/hook/AuthContext";
-import ModalMenus from "src/components/ModalAddRemove";
 import { Toaster } from "react-hot-toast";
+import { ScreenFavo } from "src/components/ScreenFavo";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
   const [open, setOpen] = useRecoilState(MoviesState);
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const [posts, setPosts] = useState<Movies[]>([]);
-  const [post, setPost] = useState<Movies[]>([]);
   const { user } = useAuth();
 
   // firestoreのデータ取得
@@ -59,7 +58,7 @@ const Favorite: NextPage = () => {
                 </p>
               </div>
               <div className="absolute bottom-0 right-0 ">
-                <ModalMenus post={post} />
+                <ScreenFavo post={post} />
               </div>
             </div>
           );

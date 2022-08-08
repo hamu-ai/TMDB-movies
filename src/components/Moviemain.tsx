@@ -5,7 +5,7 @@ import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
-import ModalMenus from "./ModalAddRemove";
+import { ScreenFavo } from "./ScreenFavo";
 type Props = {
   title?: string;
   movie: Movies[];
@@ -75,7 +75,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                 />
               </div>
               <div className="absolute right-0 top-0">
-                <ModalMenus post={movies} />
+                <ScreenFavo post={movies} />
               </div>
             </div>
           );

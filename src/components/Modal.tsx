@@ -9,8 +9,8 @@ import { useRecoilState } from "recoil";
 import ReactPlayer from "react-player";
 import { URL } from "src/utils";
 import { Element } from "src/type";
-import ModalMenus from "./ModalAddRemove";
 import Image from "next/image";
+import ModalFavorite from "./ModalFavorite";
 
 const style = {
   position: "absolute" as "absolute",
@@ -70,7 +70,7 @@ const Modals: FC = () => {
 
               <div className="flex  relative bottom-6 md:bottom-3">
                 <div className="relative md:bottom-3 ml-6">
-                  <ModalMenus />
+                  <ModalFavorite />
                 </div>
                 <button onClick={() => setMuted(!muted)}>
                   {muted === false ? (

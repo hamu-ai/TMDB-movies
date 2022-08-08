@@ -9,9 +9,9 @@ import MuiModal from "@mui/material/Modal";
 import Clear from "@mui/icons-material/Clear";
 import ReactPlayer from "react-player";
 import { URL } from "src/utils";
-import ModalMenus from "../ModalAddRemove";
 import VolumeUp from "@mui/icons-material/VolumeUp";
 import VolumeOff from "@mui/icons-material/VolumeOff";
+import ModalFavorite from "../ModalFavorite";
 
 const style = {
   position: "absolute" as "absolute",
@@ -70,7 +70,7 @@ const TvIds: FC = () => {
 
               <div className="flex  relative bottom-6 md:bottom-3">
                 <div className="relative md:bottom-3 ml-6">
-                  <ModalMenus />
+                  <ModalFavorite />
                 </div>
 
                 <button onClick={() => setMuted(!muted)}>

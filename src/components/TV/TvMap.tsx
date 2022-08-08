@@ -3,7 +3,7 @@ import Image from "next/image";
 import { useRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
-import ModalMenus from "../ModalAddRemove";
+import { ScreenFavo } from "../ScreenFavo";
 
 type Props = {
   tv: Movies;
@@ -36,7 +36,7 @@ const TvMap: FC<Props> = ({ tv }) => {
         </div>
       </div>
       <div className="absolute right-7 bottom-0  ">
-        <ModalMenus post={tv} />
+        <ScreenFavo post={tv} />
       </div>
     </div>
   );
