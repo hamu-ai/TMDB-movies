@@ -21,9 +21,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
 
   const handleClick = (direction: string) => {
     if (ref.current) {
-      const scrollLeft = ref.current.scrollLeft;
-      const clientWidth = ref.current.clientWidth;
-      const scrollWidth = ref.current.scrollWidth;
+      const { scrollLeft, clientWidth, scrollWidth } = ref.current;
 
       const scrollTo =
         direction === "left"
