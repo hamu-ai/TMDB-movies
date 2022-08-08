@@ -56,7 +56,7 @@ export const ScreenFavo: FC<Props> = ({ post }) => {
         doc(db, "movies", user!.uid, "movie", post?.id.toString()!)
       );
 
-      toast(`${post?.name || post?.original_name} 削除`, {
+      toast(`${post?.name || post?.title || post?.original_name} 削除`, {
         duration: 2000,
       });
       setAdd(false);
@@ -69,7 +69,7 @@ export const ScreenFavo: FC<Props> = ({ post }) => {
       );
 
       toast(
-        `${post?.name || post?.original_name} 
+        `${post?.name || post?.title || post?.original_name} 
           登録`,
         {
           duration: 2000,
