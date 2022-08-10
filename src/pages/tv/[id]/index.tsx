@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import TvIds from "src/components/TV";
 import TvMap from "src/components/TV/TvMap";
 import { Toaster } from "react-hot-toast";
+import Meta from "src/components/Meta";
 
 const Tvmovies: NextPage = () => {
   const TV = useRecoilValue(MoviesState);
@@ -32,6 +33,7 @@ const Tvmovies: NextPage = () => {
 
   return (
     <div className="h-[95vh]">
+      <Meta title="ドラマを見よう" />
       <div className="relative top-10">
         <div className="relative top-16  TVgrid ">
           {show.map((tv) => (

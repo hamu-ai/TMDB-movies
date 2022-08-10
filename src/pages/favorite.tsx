@@ -10,6 +10,7 @@ import Modals from "src/components/Modal";
 import { useAuth } from "src/hook/AuthContext";
 import { Toaster } from "react-hot-toast";
 import { ScreenFavo } from "src/components/ScreenFavo";
+import Meta from "src/components/Meta";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
@@ -33,6 +34,7 @@ const Favorite: NextPage = () => {
 
   return (
     <div className="relative top-20 ">
+      <Meta title="お気に入り" />
       <Toaster position="top-center" reverseOrder={false} />
       <div className=" Favorite gap-4  mx-2   ">
         {posts.map((post) => {

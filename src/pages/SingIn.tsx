@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Meta from "src/components/Meta";
 import { useAuth } from "src/hook/AuthContext";
 import { NextPageWithLayout } from "./_app";
 
@@ -27,6 +28,7 @@ const Sngin: NextPageWithLayout = () => {
   };
   return (
     <div className=" relative w-screen h-screen ">
+      <Meta title="ログイン" />
       <Image
         src={"/movie.png"}
         layout="fill"
