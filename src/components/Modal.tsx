@@ -37,7 +37,9 @@ const Modals: FC = () => {
 
     const WatchVideo = async () => {
       const data = await fetch(
-        `${URL}/movie/${movies?.id}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${movies?.original_language}&append_to_response=videos`
+        `${URL}/${movies.title ? "movie" : "tv"}/${movies?.id}?api_key=${
+          process.env.NEXT_PUBLIC_API_KEY
+        }&language=${movies?.original_language}&append_to_response=videos`
       ).then((res) => res.json());
 
       if (data.videos) {
