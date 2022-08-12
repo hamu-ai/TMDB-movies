@@ -13,14 +13,12 @@ const Nav = () => {
   const [menu, setMenu] = useState(false);
 
   useEffect(() => {
-    window.addEventListener("resize", () => {
-      const dd = window.outerWidth;
-      if (dd < 570) {
-        setMenu(true);
-      } else {
-        setMenu(false);
-      }
-    });
+    const dd = window.outerWidth;
+    if (dd < 570) {
+      setMenu(true);
+    } else {
+      setMenu(false);
+    }
   }, []);
 
   return (
