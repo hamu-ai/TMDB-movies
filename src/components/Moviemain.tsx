@@ -1,19 +1,18 @@
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
 import { Movies } from "src/type";
-import ArrowBackIos from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { ScreenFavo } from "./ScreenFavo";
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
 type Props = {
   title?: string;
   movie: Movies[];
 };
 
 const Moviemain: FC<Props> = ({ title, movie }) => {
-  const [open, setOpen] = useRecoilState(MoviesState);
-  const [movies, setMovies] = useRecoilState(MoviesDataState);
+  const setOpen = useSetRecoilState(MoviesState);
+  const setMovies = useSetRecoilState(MoviesDataState);
   const [left, setLeft] = useState(false);
   const [right, setRight] = useState(true);
 
@@ -47,12 +46,9 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
   };
 
   return (
-    <div className=" text-2xl  ">
-      <h1 className="pl-3">{title}</h1>
-      <div
-        ref={ref}
-        className="flex  mx-3  overflow-x-scroll scrollbar-hide my-5 h-full"
-      >
+    <div className=" text-2xl md:text-3xl ml-3    ">
+      <p className=" text-white ">{title}</p>
+      <div ref={ref} className="flex   overflow-x-scroll scrollbar-hide my-5 ">
         {movie.map((movies) => {
           return (
             <div key={movies.id} className="mx-1 relative">
@@ -79,26 +75,18 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
           );
         })}
         {left ? (
-          <ArrowBackIos
+          <IconArrowLeft
             onClick={() => handleClick("left")}
-            className="absolute left-5 mt-8  md:mt-16 md:ml-2 Transition"
-            sx={{
-              "@media screen and (min-width:765px)": {
-                fontSize: 40,
-              },
-            }}
+            className="absolute left-3 mt-8  md:mt-16 md:ml-2 bg-gray-500 bg-opacity-70 Transition"
+            size={35}
           />
         ) : null}
 
         {right ? (
-          <ArrowForwardIosIcon
+          <IconArrowRight
             onClick={() => handleClick("right")}
-            className="absolute right-5 mt-8 md:mt-16 md:mr-2   Transition"
-            sx={{
-              "@media screen and (min-width:765px)": {
-                fontSize: 40,
-              },
-            }}
+            className="absolute right-3 mt-8 md:mt-16 md:mr-2  bg-gray-500 bg-opacity-70  Transition"
+            size={35}
           />
         ) : null}
       </div>

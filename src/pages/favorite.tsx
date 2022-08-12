@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { collection, getDocs, onSnapshot } from "firebase/firestore";
 import { db } from "src/lib/firebase";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 import { Movies } from "src/type";
 import Image from "next/image";
 import Modals from "src/components/Modal";
@@ -14,8 +14,8 @@ import Meta from "src/components/Meta";
 
 const Favorite: NextPage = () => {
   const movieModal = useRecoilValue(MoviesState);
-  const [open, setOpen] = useRecoilState(MoviesState);
-  const [movies, setMovies] = useRecoilState(MoviesDataState);
+  const setOpen = useSetRecoilState(MoviesState);
+  const setMovies = useSetRecoilState(MoviesDataState);
   const [posts, setPosts] = useState<Movies[]>([]);
   const { user } = useAuth();
 
@@ -33,29 +33,28 @@ const Favorite: NextPage = () => {
   }, [user]);
 
   return (
-    <div className="relative top-20 ">
+    <div className="relative top-20  ">
       <Meta title="お気に入り" />
       <Toaster position="top-center" reverseOrder={false} />
-      <div className=" Favorite gap-4  mx-2   ">
+      <div className=" Favorite gap-4  mx-2 mb-80  ">
         {posts.map((post) => {
           return (
-            <div key={post.id} className="relative">
+            <div key={post.id} className="relative Transition ">
               <div
                 onClick={() => {
                   setOpen(true);
                   setMovies(post);
                 }}
-                className="relative w-full h-40   border border-white  "
+                className="relative w-full h-40 md:h-48 border-solid border-white  "
               >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${
                     post?.poster_path || post?.backdrop_path
                   }`}
-                  className="object-cover  "
                   layout="fill"
                   alt="error"
                 />
-                <p className="absolute top-0 bg-opacity-50 bg-black w-full text-sm ">
+                <p className="absolute top-0 bg-opacity-50 m-0 bg-black  text-sm text-white ">
                   {post.title || post.original_title || post.name}
                 </p>
               </div>

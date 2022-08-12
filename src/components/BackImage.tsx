@@ -1,19 +1,19 @@
-import { Button, Stack } from "@mui/material";
 import Image from "next/image";
 import { FC, useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 import { MovieUrl } from "src/utils/movies";
+import { Button } from "@mantine/core";
 
 type Props = {
   comingSoon: Movies[];
 };
 
 const BackImage: FC<Props> = ({ comingSoon }) => {
-  const [open, setOpen] = useRecoilState(MoviesState);
+  const setOpen = useSetRecoilState(MoviesState);
   const [movie, setMovi] = useState<Movies | null>(null);
-  const [movies, setMovies] = useRecoilState(MoviesDataState);
+  const setMovies = useSetRecoilState(MoviesDataState);
 
   useEffect(() => {
     setMovi(comingSoon[Math.floor(Math.random() * comingSoon.length)]);
@@ -28,17 +28,17 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
           alt="ss"
         />
       </div>
-
-      <h1 className="  text-xl  md:text-2xl ">
-        {movie?.title || movie?.original_title}
-      </h1>
-      <p className="text-sm md:text-md  max-w-sm md:max-w-lg  lg:max-w-xl">
-        {movie?.overview}
-      </p>
-      <Stack spacing={2} direction="row">
+      <div className="text-white ">
+        <h1 className="text-xl   md:text-2xl  ">
+          {movie?.title || movie?.original_title}
+        </h1>
+        <p className="text-sm md:text-md  max-w-md  md:max-w-lg  lg:max-w-xl">
+          {movie?.overview}
+        </p>
+      </div>
+      <div>
         <Button
-          variant="contained"
-          className="font-bold text-xl mt-4 "
+          className=" text-xl mt-4 "
           onClick={() => {
             setOpen(true);
             setMovies(movie);
@@ -46,7 +46,7 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
         >
           再生
         </Button>
-      </Stack>
+      </div>
     </div>
   );
 };

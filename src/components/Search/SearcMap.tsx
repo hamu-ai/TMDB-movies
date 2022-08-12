@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { FC } from "react";
-import { useRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 
@@ -9,15 +9,15 @@ type Props = {
 };
 
 export const SearcMap: FC<Props> = ({ shows }) => {
-  const [movies, setMovies] = useRecoilState(MoviesDataState);
-  const [open, setOpen] = useRecoilState(MoviesState);
+  const setMovies = useSetRecoilState(MoviesDataState);
+  const setOpen = useSetRecoilState(MoviesState);
   return (
     <div
       onClick={() => {
         setOpen(true);
         setMovies(shows);
       }}
-      className="relative  w-40  h-56 lg:w-52 lg:h-64   mx-auto  border-8 border-red-700 py-3 bg-gray-500 hover:bg-black  Transition    "
+      className="relative  w-40  h-56 lg:w-52 lg:h-64   mx-auto border-solid border-red-700 py-3 bg-gray-500 hover:bg-black  Transition    "
     >
       {shows.backdrop_path || shows.poster_path ? (
         <>
@@ -29,17 +29,17 @@ export const SearcMap: FC<Props> = ({ shows }) => {
             layout="fill"
             alt={`${shows.name || shows.title}`}
           />
-          <p className="absolute top-0 bg-black bg-opacity-50">
+          <p className="absolute top-0 m-0 bg-black bg-opacity-50 text-white">
             {shows?.name || shows?.title}
           </p>
           {shows.vote_average ? (
-            <p className="absolute right-0 bottom-0 bg-orange-600 rounded-lg ">
+            <p className="absolute right-0 bottom-0 m-0 text-white bg-orange-600 rounded-lg ">
               評価{shows.vote_average}
             </p>
           ) : null}
         </>
       ) : (
-        <div>{shows.name || shows.title}</div>
+        <div className="text-white">{shows.name || shows.title}</div>
       )}
     </div>
   );
