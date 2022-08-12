@@ -1,5 +1,4 @@
 import type { NextPage } from "next";
-import Head from "next/head";
 import { Toaster } from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { MoviesState } from "src/atom/MovieState";
