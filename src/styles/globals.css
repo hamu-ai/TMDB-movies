@@ -1,12 +1,7 @@
 @tailwind base;
 @tailwind components;
-@tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-black text-white;
-  }
-}
+@tailwind utilities;
 
 @layer components {
   .Searchgrid {
@@ -14,19 +9,19 @@
   }
 
   .Favorite {
-    @apply grid grid-cols-3 md:grid-cols-7 lg:grid-cols-8 xl:grid-cols-10;
+    @apply grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-7 xl:grid-cols-9;
   }
 
   .TVgrid {
     @apply grid  gap-2  sm:grid-cols-2  md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5;
   }
   .NavText {
-    @apply text-white font-bold cursor-pointer;
+    @apply text-white text-xl font-bold cursor-pointer;
   }
   .Transition {
     @apply transition hover:-translate-y-1 hover:scale-110 cursor-pointer;
   }
   .SearcTrue {
-    @apply font-bold text-4xl relative top-3;
+    @apply font-bold text-2xl relative top-3 bg-orange-600 hover:bg-orange-400;
   }
 }
