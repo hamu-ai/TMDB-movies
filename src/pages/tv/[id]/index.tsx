@@ -1,14 +1,14 @@
-import { Pagination, Stack } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import { MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import TvIds from "src/components/TV";
 import TvMap from "src/components/TV/TvMap";
 import { Toaster } from "react-hot-toast";
 import Meta from "src/components/Meta";
+import { Pagination } from "@mantine/core";
+import Modals from "src/components/Modal";
 
 const Tvmovies: NextPage = () => {
   const TV = useRecoilValue(MoviesState);
@@ -32,7 +32,7 @@ const Tvmovies: NextPage = () => {
   }, [page]);
 
   return (
-    <div className="h-[95vh]">
+    <div>
       <Meta title="ドラマを見よう" />
       <div className="relative top-10">
         <div className="relative top-16  TVgrid ">
@@ -41,22 +41,20 @@ const Tvmovies: NextPage = () => {
           ))}
         </div>
         <div className="mt-14">
-          <Stack spacing={2}>
-            <Pagination
-              count={20}
-              showFirstButton
-              showLastButton
-              color="primary"
-              className=" w-screen flex justify-center py-4 bg-red-600"
-              onChange={(e, page) => {
-                setpage(page);
-                router.push(`/tv/${page}`);
-              }}
-            />
-          </Stack>
+          <Pagination
+            total={20}
+            siblings={2}
+            initialPage={1}
+            className="  flex justify-center py-4 "
+            color="red"
+            onChange={(page) => {
+              setpage(page);
+              router.push(`/tv/${page}`);
+            }}
+          />
         </div>
         <Toaster position="top-center" reverseOrder={false} />
-        {TV && <TvIds />}
+        {TV && <Modals />}
       </div>
     </div>
   );

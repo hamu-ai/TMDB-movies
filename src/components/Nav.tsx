@@ -1,22 +1,16 @@
 import Link from "next/link";
-import IconButton from "@mui/material/IconButton";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
-import BookmarkAdd from "@mui/icons-material/BookmarkAdd";
-import HomeIcon from "@mui/icons-material/Home";
+import { Menu, Text, Burger } from "@mantine/core";
 import { useEffect, useState } from "react";
+import {
+  IconSearch,
+  IconHome,
+  IconMovie,
+  IconBookmark,
+  IconBook2,
+} from "@tabler/icons";
 
 const Nav = () => {
   const [menu, setMenu] = useState(false);
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
 
   useEffect(() => {
     window.addEventListener("resize", () => {
@@ -30,13 +24,13 @@ const Nav = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 gap-x-7   ">
+    <div className="flex flex-1 gap-x-7 items-center cursor-pointer  ">
       <Link href="/">
-        <h1 className="font-bold text-2xl cursor-pointer">Movies</h1>
+        <h1 className="font-bold text-2xl ">Movies</h1>
       </Link>
-      <div className="flex  mt-2 ">
+      <div className="flex  mt-2  ">
         {menu === false ? (
-          <div className="flex gap-x-2">
+          <div className="flex gap-x-2 items-center">
             <Link href="/tv/1">
               <h1 className="NavText ">TV</h1>
             </Link>
@@ -46,53 +40,45 @@ const Nav = () => {
             </Link>
 
             <Link href="/favorite">
-              <h1 className="text-red-700 font-bold cursor-pointer  ">
-                <BookmarkAdd />
+              <h1>
+                <IconBook2 />
               </h1>
             </Link>
           </div>
         ) : (
           <>
-            <IconButton
-              aria-label="more"
-              id="long-button"
-              aria-controls={open ? "long-menu" : undefined}
-              aria-expanded={open ? "true" : undefined}
-              aria-haspopup="true"
-              onClick={handleClick}
-              className="!text-white !bg-black !bg-opacity-50 "
-            >
-              <MoreVertIcon fontSize="small" />
-            </IconButton>
-            <Menu
-              id="basic-menu"
-              anchorEl={anchorEl}
-              open={open}
-              onClose={handleClose}
-              MenuListProps={{
-                "aria-labelledby": "basic-button",
-              }}
-            >
-              <MenuItem onClick={handleClose}>
-                <Link href="/tv/1">
-                  <p> TV</p>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link href="/Search">
-                  <p> 検索</p>
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
-                <Link href="favorite">
-                  <BookmarkAdd />
-                </Link>
-              </MenuItem>
-              <MenuItem onClick={handleClose}>
+            <Menu shadow="md" width={200}>
+              <Menu.Target>
+                <Burger opened={false} />
+              </Menu.Target>
+
+              <Menu.Dropdown>
+                <Menu.Label>Application</Menu.Label>
                 <Link href="/">
-                  <HomeIcon color="warning" />
+                  <Menu.Item icon={<IconHome size={14} />}>Home</Menu.Item>
                 </Link>
-              </MenuItem>
+                <Link href="/tv/1">
+                  <Menu.Item icon={<IconMovie size={14} />}>TV</Menu.Item>
+                </Link>
+                <Link href="/Search">
+                  <Menu.Item
+                    icon={<IconSearch size={14} />}
+                    rightSection={
+                      <Text size="xs" color="dimmed">
+                        ⌘K
+                      </Text>
+                    }
+                  >
+                    Search
+                  </Menu.Item>
+                </Link>
+                <Link href="/favorite">
+                  <Menu.Item icon={<IconBookmark size={14} />}>
+                    favorite
+                  </Menu.Item>
+                </Link>
+                <Menu.Divider />
+              </Menu.Dropdown>
             </Menu>
           </>
         )}

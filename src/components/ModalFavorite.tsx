@@ -10,10 +10,10 @@ import toast from "react-hot-toast";
 import { db } from "src/lib/firebase";
 import { MoviesDataState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
 import { useAuth } from "src/hook/AuthContext";
 import { Movies } from "src/type";
+import { ActionIcon } from "@mantine/core";
+import { IconHeart, IconHeartOff } from "@tabler/icons";
 
 const ModalFavorite: FC = () => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
@@ -72,17 +72,21 @@ const ModalFavorite: FC = () => {
   };
   return (
     <div>
-      <button onClick={handleList}>
+      <div onClick={handleList}>
         {add ? (
-          <Favorite color="warning" className="h-7 w-7" fontSize="large" />
+          <ActionIcon
+            variant="filled"
+            className="bg-orange-500 hover:bg-orange-500 "
+            size={40}
+          >
+            <IconHeart size={28} />
+          </ActionIcon>
         ) : (
-          <FavoriteBorder
-            color="warning"
-            className="h-7 w-7"
-            fontSize="large"
-          />
+          <ActionIcon variant="filled" size={40}>
+            <IconHeartOff size={28} />
+          </ActionIcon>
         )}
-      </button>
+      </div>
     </div>
   );
 };

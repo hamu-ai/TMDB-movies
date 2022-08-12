@@ -1,17 +1,16 @@
 import { FC, useEffect } from "react";
-import { Pagination, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { Movies } from "src/type";
-import SearchIcon from "@mui/icons-material/Search";
 import {
   MoviesState,
   SearchDeliberation,
   SearchState,
 } from "src/atom/MovieState";
 import { useRecoilState, useRecoilValue } from "recoil";
-import TvIds from "src/components/TV";
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
+import { Button, Pagination, TextInput } from "@mantine/core";
+import { IconSearch } from "@tabler/icons";
 
 const TvSearch: FC = () => {
   const deliberation = useRecoilValue(SearchDeliberation);
@@ -46,75 +45,68 @@ const TvSearch: FC = () => {
   }, [page]);
 
   return (
-    <div className="h-screen relative top-10   ">
+    <div className=" relative top-10    ">
       <div className="flex justify-center  gap-x-5">
-        <button>
-          <p
-            className={`${
-              search === true
-                ? "text-blue-300 px-4 SearcTrue "
-                : "  px-4 font-bold text-1xl relative top-3"
-            } `}
-            onClick={() => setSearch(true)}
-          >
-            TV
-          </p>
-        </button>
+        <Button
+          className={`${
+            search === true ? " px-4 SearcTrue " : "  px-4  relative top-3"
+          } `}
+          onClick={() => setSearch(true)}
+        >
+          TV
+        </Button>
 
-        <button>
-          <p
-            className={`${
-              search === false
-                ? "text-blue-300  px-4 SearcTrue "
-                : "  px-4 font-bold text-1xl relative top-3"
-            } `}
-            onClick={() => setSearch(false)}
-          >
-            映画
-          </p>
-        </button>
+        <Button
+          className={`${
+            search === false ? "  px-4 SearcTrue " : "  px-4   relative top-3"
+          } `}
+          onClick={() => setSearch(false)}
+        >
+          映画
+        </Button>
       </div>
-      <div className="relative top-7 flex justify-center gap-x-6">
-        <div className="flex justify-center">
-          <TextField
-            id="outlined-helperText"
+      <div className="relative top-7  ">
+        <div className="flex justify-center gap-x-2">
+          <TextInput
             label={`${deliberation?.title} 検索`}
-            className="bg-white"
             onChange={(e) => setText(e.target.value)}
           />
-          <button
+
+          <Button
             onClick={() => {
               fetchSearch();
             }}
-            className=" py-2 bg-blue-600"
+            className=" py-2 bg-blue-600 mt-6"
           >
-            <SearchIcon sx={{ fontSize: 40 }} />
-          </button>
+            <IconSearch />
+          </Button>
         </div>
       </div>
       <div className="relative top-10  flex justify-center">
-        <Stack spacing={2} className="bg-white">
-          <Pagination
-            count={total}
-            variant="outlined"
-            color="primary"
-            onChange={(e, page) => {
-              setPage(page);
-            }}
-          />
-        </Stack>
+        <Pagination
+          total={total}
+          styles={(theme) => ({
+            item: {
+              "&[data-active]": {
+                backgroundImage: theme.fn.gradient({
+                  from: "red",
+                  to: "yellow",
+                }),
+              },
+            },
+          })}
+          onChange={(page) => {
+            setPage(page);
+          }}
+        />
       </div>
 
-      <div className="relative top-14   Searchgrid  gap-5  mx-2">
+      <div className="relative top-14   Searchgrid  gap-5 mb-36  mx-2">
         {show?.map((shows) => (
           <SearcMap key={shows.id} shows={shows} />
         ))}
       </div>
-      {search === true ? (
-        <div>{TV && <TvIds />}</div>
-      ) : (
-        <div>{TV && <Modals />}</div>
-      )}
+      {TV && <Modals />}
     </div>
   );
 };

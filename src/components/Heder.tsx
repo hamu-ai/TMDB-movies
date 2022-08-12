@@ -1,9 +1,8 @@
-import { MenuItem } from "@mui/material";
 import { FC, useEffect, useState } from "react";
 import { useAuth } from "src/hook/AuthContext";
 import Nav from "./Nav";
-import Mueus from "./Menus";
-import Logout from "@mui/icons-material/Logout";
+
+import { Menu, Button } from "@mantine/core";
 
 const Heder: FC = () => {
   const { singOut } = useAuth();
@@ -25,13 +24,18 @@ const Heder: FC = () => {
     flex w-screen  h-10 p-10 items-center  fixed z-10  `}
     >
       <Nav />
-      <Mueus
-        style={"!bg-blue-600  hover:!bg-blue-400"}
-        Icons={<Logout fontSize="small" />}
-        props={
-          <MenuItem onClick={() => singOut()}>ログアウトしますか？</MenuItem>
-        }
-      />
+      <div className="mt-3">
+        <Menu shadow="md" width={200}>
+          <Menu.Target>
+            <Button>ログアウト</Button>
+          </Menu.Target>
+          <Menu.Dropdown>
+            <Menu.Item onClick={() => singOut()}>
+              ログアウトしますか？
+            </Menu.Item>
+          </Menu.Dropdown>
+        </Menu>
+      </div>
     </div>
   );
 };

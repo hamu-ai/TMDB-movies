@@ -1,3 +1,4 @@
+import { Button, PasswordInput, TextInput } from "@mantine/core";
 import Image from "next/image";
 import { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -40,10 +41,8 @@ const Sngin: NextPageWithLayout = () => {
         onSubmit={handleSubmit(onSubmit)}
         className="relative flex flex-col h-screen justify-center  gap-y-4 max-w-xs md:max-w-md mx-auto"
       >
-        <input
-          type="email"
+        <TextInput
           placeholder="メールアドレス"
-          className=" border border-black bg-gray-600 cursor-default "
           {...register("email", { required: true })}
         />
         {errors.email && (
@@ -51,10 +50,8 @@ const Sngin: NextPageWithLayout = () => {
             メールアドレス入力してください
           </p>
         )}
-        <input
-          type="password"
+        <PasswordInput
           placeholder="パスワード6文字以上"
-          className=" border border-black bg-gray-600 cursor-default "
           {...register("password", { required: true })}
         />
         {errors.password && (
@@ -63,13 +60,13 @@ const Sngin: NextPageWithLayout = () => {
           </p>
         )}
 
-        <button
+        <Button
           type="submit"
           onClick={() => setLogin(true)}
           className=" font-bold text-xl bg-red-700 hover:bg-red-500"
         >
           ログイン
-        </button>
+        </Button>
         <div className="flex gap-x-2 ">
           {"アカウントない場合"}
           <button
