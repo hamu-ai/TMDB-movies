@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { Menu, Text, Burger } from "@mantine/core";
+import { Menu, Text, Burger, ActionIcon } from "@mantine/core";
 import { useEffect, useState } from "react";
 import {
   IconSearch,
   IconHome,
   IconMovie,
-  IconBookmark,
-  IconBook2,
+  IconSettings,
+  IconStar,
 } from "@tabler/icons";
 
 const Nav = () => {
@@ -22,7 +22,7 @@ const Nav = () => {
   }, []);
 
   return (
-    <div className="flex flex-1 gap-x-7 items-center cursor-pointer  ">
+    <div className="flex  gap-x-7 items-center cursor-pointer  ">
       <Link href="/">
         <h1 className="font-bold text-2xl ">Movies</h1>
       </Link>
@@ -38,9 +38,21 @@ const Nav = () => {
             </Link>
 
             <Link href="/favorite">
-              <h1>
-                <IconBook2 />
-              </h1>
+              <ActionIcon
+                variant="filled"
+                className="bg-blue-700 hover:bg-blue-500"
+              >
+                <IconStar size={30} />
+              </ActionIcon>
+            </Link>
+
+            <Link href="/Setting">
+              <ActionIcon
+                variant="filled"
+                className="bg-red-700 hover:bg-red-500"
+              >
+                <IconSettings size={30} />
+              </ActionIcon>
             </Link>
           </div>
         ) : (
@@ -71,9 +83,11 @@ const Nav = () => {
                   </Menu.Item>
                 </Link>
                 <Link href="/favorite">
-                  <Menu.Item icon={<IconBookmark size={14} />}>
-                    favorite
-                  </Menu.Item>
+                  <Menu.Item icon={<IconStar size={14} />}>favorite</Menu.Item>
+                </Link>
+
+                <Link href="/Setting">
+                  <Menu.Item icon={<IconSettings size={14} />}>設定</Menu.Item>
                 </Link>
                 <Menu.Divider />
               </Menu.Dropdown>
