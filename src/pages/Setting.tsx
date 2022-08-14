@@ -138,7 +138,7 @@ const Setting: NextPage = () => {
         </Modal>
 
         <div className="flex flex-col items-end space-y-6 mr-8">
-          {/*   　ログアウト      */}
+          {/*    　ログアウト      */}
           <Button onClick={() => singOut()}>ログアウト</Button>
 
           {/*   　データ削除メニュー     */}
