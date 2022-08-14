@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
-import { useCallback, useEffect, useState } from "react";
+import { ComponentProps, useCallback, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import { SettingState } from "src/atom/MovieState";
@@ -29,10 +29,11 @@ const Setting: NextPage = () => {
     if (user !== null) {
       setProfile(user.email!);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [setting]);
 
   // ユーザーを再認証する
-  const hndle = useCallback(() => {
+  const hndle = () => {
     const credential = EmailAuthProvider.credential(user?.email!, password);
     reauthenticateWithCredential(user!, credential)
       .then(() => {
@@ -43,7 +44,7 @@ const Setting: NextPage = () => {
         setPasswordUpdate(false);
         toast.error("パスワードを間違えています。");
       });
-  }, [user?.email!, password]);
+  };
 
   return (
     <div className=" flex flex-col h-screen  justify-center max-w-lg mx-auto">
