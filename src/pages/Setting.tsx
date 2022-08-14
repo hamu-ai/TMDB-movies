@@ -8,7 +8,7 @@ import {
   TextInput,
 } from "@mantine/core";
 import { EmailAuthProvider, reauthenticateWithCredential } from "firebase/auth";
-import { ComponentProps, useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useRecoilState } from "recoil";
 import { SettingState } from "src/atom/MovieState";
