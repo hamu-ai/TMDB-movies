@@ -1,9 +1,12 @@
-import { Button, PasswordInput, TextInput } from "@mantine/core";
+import { Button, Modal, PasswordInput, TextInput } from "@mantine/core";
+import { sendPasswordResetEmail } from "firebase/auth";
 import Image from "next/image";
 import { ReactElement, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import toast, { Toaster } from "react-hot-toast";
 import Meta from "src/components/Meta";
 import { useAuth } from "src/hook/AuthContext";
+import { auth } from "src/lib/firebase";
 import { NextPageWithLayout } from "./_app";
 
 type Inputs = {
@@ -14,6 +17,26 @@ type Inputs = {
 const Sngin: NextPageWithLayout = () => {
   const { singIn, singUp } = useAuth();
   const [login, setLogin] = useState(false);
+  const [opened, setOpened] = useState(false);
+  const [text, setText] = useState("");
+
+  // パスワード再設定
+  const handleClick = () => {
+    if (text.length > 0) {
+      sendPasswordResetEmail(auth, text)
+        .then(() => {
+          toast.success("メールを送信しました。", {
+            duration: 2000,
+          });
+          setTimeout(() => setOpened(false), 2000);
+        })
+        .catch((error) => {
+          toast.error("メールアドレスが間違えています。");
+        });
+    } else {
+      toast.error("メールアドレスを入力してください!");
+    }
+  };
 
   const {
     register,
@@ -28,7 +51,8 @@ const Sngin: NextPageWithLayout = () => {
     }
   };
   return (
-    <div className=" relative w-screen h-screen ">
+    <div className=" relative  h-screen ">
+      <Toaster position="top-center" reverseOrder={false} />
       <Meta title="ログイン" />
       <Image
         src={"/movie.png"}
@@ -67,6 +91,34 @@ const Sngin: NextPageWithLayout = () => {
         >
           ログイン
         </Button>
+
+        {/*    パスワード再設定の処理    */}
+        <p
+          className="text-sm m-0 text-right font-bold cursor-pointer "
+          onClick={() => setOpened(true)}
+        >
+          パスワード忘れた場合
+        </p>
+
+        <Modal
+          opened={opened}
+          onClose={() => setOpened(false)}
+          title="メールアドレス入力してください"
+        >
+          <TextInput
+            placeholder="メールアドレス"
+            onChange={(e) => setText(e.target.value)}
+          />
+          <Button
+            type="submit"
+            onClick={handleClick}
+            className=" absolute right-5 bottom-5 font-bold text-xl bg-red-700 hover:bg-red-500 "
+          >
+            送信
+          </Button>
+        </Modal>
+
+        {/*    サインアップ    */}
         <div className="flex gap-x-2 ">
           {"アカウントない場合"}
           <button
