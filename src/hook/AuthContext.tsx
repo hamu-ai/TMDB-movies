@@ -144,7 +144,7 @@ const AuthProvider = ({ children }: Child) => {
         setLoading(false);
       })
       .catch(() => {
-        alert("メールアドレスとパスワード６桁以上入力してください。");
+        alert("アカウントがありません。");
       });
   };
 
