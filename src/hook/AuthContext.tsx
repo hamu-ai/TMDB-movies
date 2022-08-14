@@ -4,6 +4,9 @@ import {
   User,
   signOut,
   onAuthStateChanged,
+  deleteUser,
+  updateEmail,
+  updatePassword,
 } from "firebase/auth";
 import { useRouter } from "next/router";
 import {
@@ -13,6 +16,9 @@ import {
   useEffect,
   useState,
 } from "react";
+import toast from "react-hot-toast";
+import { useSetRecoilState } from "recoil";
+import { SettingState } from "src/atom/MovieState";
 import { auth } from "src/lib/firebase";
 
 type Props = {
@@ -20,9 +26,15 @@ type Props = {
   singUp: (email: string, password: string) => Promise<void>;
   singIn: (email: string, password: string) => Promise<void>;
   singOut: () => Promise<void>;
+  erase: () => void;
+  updataMail: (text: string) => void;
+  updataPassword: (text: string) => void;
 };
 
 const AuthContext = createContext<Props>({
+  updataPassword: () => {},
+  updataMail: () => {},
+  erase: () => {},
   user: null,
   singUp: async () => {},
   singIn: async () => {},
@@ -40,8 +52,11 @@ type Child = {
 const AuthProvider = ({ children }: Child) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const setSetting = useSetRecoilState(SettingState);
 
   const router = useRouter();
+
+  //  現在ログインしているユーザーを取得
 
   useEffect(
     () =>
@@ -61,6 +76,48 @@ const AuthProvider = ({ children }: Child) => {
     [auth]
   );
 
+  // パスワード変更
+  const updataPassword = (text: string) => {
+    if (text.length > 0) {
+      updatePassword(user!, text)
+        .then(() => {
+          toast.success("パスワード変更しました。");
+        })
+        .catch(() => {
+          toast.error("パスワード6桁以上入力してください");
+        });
+    } else {
+      toast.error("入力してください");
+    }
+  };
+
+  // メールアドレス変更
+  const updataMail = (text: string) => {
+    if (text.length > 0) {
+      updateEmail(auth.currentUser!, text)
+        .then(() => {
+          toast.success("メールアドレス変更しました。");
+          setSetting(true);
+        })
+        .catch(() => {
+          toast.error("メールアドレス変更失敗しました。");
+        });
+      setSetting(false);
+    } else {
+      toast.error("入力してください");
+    }
+  };
+
+  // ユーザー削除
+  const erase = () => {
+    deleteUser(user!)
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  // サインアップ
   const singUp = async (email: string, password: string) => {
     setLoading(false);
     await createUserWithEmailAndPassword(auth, email, password)
@@ -76,6 +133,7 @@ const AuthProvider = ({ children }: Child) => {
       });
   };
 
+  // サインイン
   const singIn = async (email: string, password: string) => {
     setLoading(false);
     signInWithEmailAndPassword(auth, email, password)
@@ -90,6 +148,7 @@ const AuthProvider = ({ children }: Child) => {
       });
   };
 
+  // ログアウト
   const singOut = async () => {
     setLoading(false);
     await signOut(auth)
@@ -106,6 +165,9 @@ const AuthProvider = ({ children }: Child) => {
     singIn,
     singOut,
     user,
+    erase,
+    updataMail,
+    updataPassword,
   };
 
   return (
