@@ -33,3 +33,8 @@ export const SearchDeliberation = selector({
     }
   },
 });
+
+export const SettingState = atom({
+  key: "SettingState",
+  default: false,
+});
