@@ -19,9 +19,11 @@ type AppPropsWithLayout = AppProps & {
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   if (Component.getLayout) {
     return Component.getLayout(
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
+      <RecoilRoot>
+        <AuthProvider>
+          <Component {...pageProps} />
+        </AuthProvider>
+      </RecoilRoot>
     );
   }
   return (
@@ -33,12 +35,12 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
         colorScheme: "dark",
       }}
     >
-      <AuthProvider>
-        <RecoilRoot>
+      <RecoilRoot>
+        <AuthProvider>
           <Heder />
           <Component {...pageProps} />
-        </RecoilRoot>
-      </AuthProvider>
+        </AuthProvider>
+      </RecoilRoot>
     </MantineProvider>
   );
 }
