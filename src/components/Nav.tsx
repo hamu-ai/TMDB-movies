@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Menu, Text, Burger, ActionIcon } from "@mantine/core";
+import { Menu, Text, Burger, Tabs } from "@mantine/core";
 import { useEffect, useState } from "react";
 import {
   IconSearch,
@@ -7,6 +7,8 @@ import {
   IconMovie,
   IconSettings,
   IconStar,
+  IconHeart,
+  IconDeviceTv,
 } from "@tabler/icons";
 
 const Nav = () => {
@@ -14,7 +16,7 @@ const Nav = () => {
 
   useEffect(() => {
     const dd = window.outerWidth;
-    if (dd < 570) {
+    if (dd < 620) {
       setMenu(true);
     } else {
       setMenu(false);
@@ -28,27 +30,34 @@ const Nav = () => {
       </Link>
       <div className="flex  mt-2  ">
         {menu === false ? (
-          <div className="flex gap-x-3 items-center">
-            <Link href="/tv/1">
-              <h1 className="NavText ">TV</h1>
-            </Link>
+          <div className="flex gap-x-3 items-center ">
+            <Tabs color="grape" defaultValue="gallery">
+              <Tabs.List>
+                <Link href="/tv/1">
+                  <Tabs.Tab value="gallery" icon={<IconDeviceTv size={20} />}>
+                    TV
+                  </Tabs.Tab>
+                </Link>
 
-            <Link href="/Search">
-              <h1 className="NavText ">検索</h1>
-            </Link>
+                <Link href="/Search">
+                  <Tabs.Tab value="gallery" icon={<IconSearch size={20} />}>
+                    検索
+                  </Tabs.Tab>
+                </Link>
 
-            <Link href="/favorite">
-              <p className="text-white font-bold">お気に入り</p>
-            </Link>
+                <Link href="/favorite">
+                  <Tabs.Tab value="gallery" icon={<IconHeart size={20} />}>
+                    お気に入り
+                  </Tabs.Tab>
+                </Link>
 
-            <Link href="/Setting">
-              <ActionIcon
-                variant="filled"
-                className="bg-red-700 hover:bg-red-500"
-              >
-                <IconSettings size={30} />
-              </ActionIcon>
-            </Link>
+                <Link href="/Setting">
+                  <Tabs.Tab value="gallery" icon={<IconSettings size={20} />}>
+                    設定
+                  </Tabs.Tab>
+                </Link>
+              </Tabs.List>
+            </Tabs>
           </div>
         ) : (
           <>

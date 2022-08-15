@@ -16,7 +16,11 @@ const Heder: FC = () => {
   return (
     <div
       className={`
-    ${isScroll ? "bg-red-600 text-white" : "text-red-600"} 
+    ${
+      isScroll
+        ? "bg-red-600 text-white"
+        : "bg-gray-600 bg-opacity-50 text-red-600"
+    } 
     flex w-screen  h-10 p-10 items-center  fixed z-10  `}
     >
       <Nav />
