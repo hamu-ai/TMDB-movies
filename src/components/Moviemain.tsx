@@ -63,7 +63,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                   src={`https://image.tmdb.org/t/p/w500${
                     movies.backdrop_path || movies.poster_path
                   }`}
-                  className="rounded-sm object-cover  Transition "
+                  className="rounded-sm   Transition "
                   layout="fill"
                   alt="error"
                 />
