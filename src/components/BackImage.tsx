@@ -19,7 +19,7 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
     setMovi(comingSoon[Math.floor(Math.random() * comingSoon.length)]);
   }, [comingSoon]);
   return (
-    <div className="flex flex-col justify-center  h-[65vh] pl-10">
+    <div className="flex flex-col justify-center  h-[65vh] pl-4">
       <div className=" top-0 left-0 -z-10 absolute h-screen w-screen">
         <Image
           layout="fill"
