@@ -28,7 +28,7 @@ const Nav = () => {
       </Link>
       <div className="flex  mt-2  ">
         {menu === false ? (
-          <div className="flex gap-x-2 items-center">
+          <div className="flex gap-x-3 items-center">
             <Link href="/tv/1">
               <h1 className="NavText ">TV</h1>
             </Link>
@@ -38,12 +38,7 @@ const Nav = () => {
             </Link>
 
             <Link href="/favorite">
-              <ActionIcon
-                variant="filled"
-                className="bg-blue-700 hover:bg-blue-500"
-              >
-                <IconStar size={30} />
-              </ActionIcon>
+              <p className="text-white font-bold">お気に入り</p>
             </Link>
 
             <Link href="/Setting">
