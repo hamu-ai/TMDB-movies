@@ -36,7 +36,7 @@ const Favorite: NextPage = () => {
     <div className="relative top-20  ">
       <Meta title="お気に入り" />
       <Toaster position="top-center" reverseOrder={false} />
-      <div className=" Favorite gap-4  mx-2 mb-80  ">
+      <div className="relative top-5  Favorite gap-4  mx-2 mb-80  ">
         {posts.map((post) => {
           return (
             <div key={post.id} className="relative Transition ">

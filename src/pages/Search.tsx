@@ -5,7 +5,7 @@ import Meta from "src/components/Meta";
 
 const Search: NextPage = () => {
   return (
-    <div className=" relative top-8  ">
+    <div className=" relative top-10  ">
       <Meta title="検索" />
       <Toaster position="top-center" reverseOrder={false} />
       <TvSearch />

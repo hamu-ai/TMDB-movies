@@ -16,7 +16,7 @@ const Nav = () => {
 
   useEffect(() => {
     const dd = window.outerWidth;
-    if (dd < 620) {
+    if (dd < 740) {
       setMenu(true);
     } else {
       setMenu(false);
@@ -31,28 +31,34 @@ const Nav = () => {
       <div className="flex  mt-2  ">
         {menu === false ? (
           <div className="flex gap-x-3 items-center ">
-            <Tabs color="grape" defaultValue="gallery">
+            <Tabs defaultValue="gallery">
               <Tabs.List>
+                <Link href="/">
+                  <Tabs.Tab value="ホーム" icon={<IconHome size={20} />}>
+                    ホーム
+                  </Tabs.Tab>
+                </Link>
+
                 <Link href="/tv/1">
-                  <Tabs.Tab value="gallery" icon={<IconDeviceTv size={20} />}>
+                  <Tabs.Tab value="TV" icon={<IconDeviceTv size={20} />}>
                     TV
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Search">
-                  <Tabs.Tab value="gallery" icon={<IconSearch size={20} />}>
+                  <Tabs.Tab value="Search" icon={<IconSearch size={20} />}>
                     検索
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/favorite">
-                  <Tabs.Tab value="gallery" icon={<IconHeart size={20} />}>
+                  <Tabs.Tab value="お気に入り" icon={<IconHeart size={20} />}>
                     お気に入り
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Setting">
-                  <Tabs.Tab value="gallery" icon={<IconSettings size={20} />}>
+                  <Tabs.Tab value="設定" icon={<IconSettings size={20} />}>
                     設定
                   </Tabs.Tab>
                 </Link>
