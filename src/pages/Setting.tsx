@@ -58,7 +58,7 @@ const Setting: NextPage = () => {
 
         {/*   　メールアドレス変更     */}
         <Button
-          className="relative top-6 text-black font-bold cursor-pointer block "
+          className="relative top-6 bg-gray-500 hover:bg-gray-700 text-white font-bold cursor-pointer block "
           onClick={() => {
             setOpened(true);
             setEmailUpdate(true);
@@ -70,6 +70,8 @@ const Setting: NextPage = () => {
           <>
             <TextInput
               placeholder="メールアドレス"
+              label="メールアドレス入力してください"
+              required
               className="min-w-full"
               onChange={(e) => setText(e.target.value)}
             />
@@ -87,7 +89,7 @@ const Setting: NextPage = () => {
 
         {/*   　パスワード変更      */}
         <Button
-          className="relative top-6 text-black font-bold  cursor-pointer  "
+          className="relative top-6 text-white bg-gray-500 hover:bg-gray-700 font-bold  cursor-pointer  "
           onClick={() => {
             setOpened(true);
             setPasswordUpdate(true);
@@ -99,6 +101,8 @@ const Setting: NextPage = () => {
           <>
             <PasswordInput
               placeholder="パスワード"
+              label="パスワード入力してください"
+              required
               onChange={(e) => setText(e.target.value)}
             />
 
