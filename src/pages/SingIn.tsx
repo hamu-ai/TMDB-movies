@@ -80,7 +80,7 @@ const Sngin: NextPageWithLayout = () => {
         />
         {errors.password && (
           <p className="text-red-600 cursor-default">
-            6文字以上ののパスワードを入力してください
+            6文字以上のパスワードを入力してください
           </p>
         )}
 
