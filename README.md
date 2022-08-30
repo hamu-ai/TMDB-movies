@@ -15,25 +15,26 @@ TVのページはTVを見ることができます。
 
 
 
-###  Vercel
-https://tmdb-movies-six.vercel.app/
+ ###  Vercel
+ [Vercel](https://tmdb-movies-six.vercel.app/) 
 
-### 状態管理ライブラリー
-Recoil https://recoiljs.org/
+ ### 状態管理ライブラリー
+ [Recoil](https://recoiljs.org/) 
 
-React.Context でfirebaseログイン実装　参考にしたサイト　→　https://zenn.dev/minguu42/articles/20210705-nextjs-auth
+ [React.Context でfirebaseログイン実装　参考にしたサイト](https://zenn.dev/minguu42/articles/20210705-nextjs-auth)　
 
-### スタイリング
-tailwind css　https://tailwindcss.com/docs/installation
+ ### スタイリング
+ [tailwind css](https://tailwindcss.com/docs/installation)　
 
-### デザイン
-追い風スクロールバー非表示 https://www.npmjs.com/package/tailwind-scrollbar-hide
+ ### デザイン
+ [追い風スクロールバー非表示](https://www.npmjs.com/package/tailwind-scrollbar-hide) 
 
-Mantine 　https://mantine.dev/
+ [Mantine](https://mantine.dev/)　
+ 
+firebaseログイン画面　[react-hook-form](https://react-hook-form.com/get-started#Registerfields)
 
-firebaseログイン画面　react-hook-form　https://react-hook-form.com/get-started#Registerfields
+ ### npmパッケージ
+ [toast](https://react-hot-toast.com/)　
 
- react-hot-toastでtoast状態　https://react-hot-toast.com/
-
-### youtube で見えるように
-react-player-npm https://github.com/cookpete/react-player
+ ### youtube で見えるように
+  [react-player-npm](https://github.com/cookpete/react-player)
