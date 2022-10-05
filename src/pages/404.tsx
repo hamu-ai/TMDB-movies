@@ -1,8 +1,7 @@
 import Link from "next/link";
-import { ReactElement, useEffect } from "react";
 import { useRouter } from "next/router";
+import { ReactElement, useEffect } from "react";
 
-// 404.　Pageは　404エラーページ
 const NotFound = () => {
   const router = useRouter();
 

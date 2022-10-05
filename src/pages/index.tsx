@@ -35,8 +35,8 @@ const Home: NextPage<Props> = ({
         description="映画やドラマの動画が見えます。"
       />
       <Toaster position="top-center" reverseOrder={false} />
-      <BackImage comingSoon={comingSoon} />
 
+      <BackImage comingSoon={comingSoon} />
       <Moviemain title={"近日公開予定"} movie={comingSoon} />
       <Moviemain movie={comingSoon2} />
       <Moviemain title={"トップ評価"} movie={TopRating} />

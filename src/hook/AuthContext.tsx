@@ -1,12 +1,12 @@
 import {
   createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  User,
-  signOut,
-  onAuthStateChanged,
   deleteUser,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
   updateEmail,
   updatePassword,
+  User,
 } from "firebase/auth";
 import { useRouter } from "next/router";
 import {

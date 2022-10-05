@@ -9,13 +9,13 @@ type Props = {
 };
 
 export const SearcMap: FC<Props> = ({ shows }) => {
-  const setMovies = useSetRecoilState(MoviesDataState);
+  const setMoviesData = useSetRecoilState(MoviesDataState);
   const setOpen = useSetRecoilState(MoviesState);
   return (
     <div
       onClick={() => {
         setOpen(true);
-        setMovies(shows);
+        setMoviesData(shows);
       }}
       className="relative  w-40  h-56 lg:w-52 lg:h-64   mx-auto border-solid border-red-700 py-3 bg-gray-500 hover:bg-black  Transition    "
     >

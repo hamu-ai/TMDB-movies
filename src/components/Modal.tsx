@@ -1,18 +1,19 @@
-import { FC, useEffect, useState } from "react";
-import { MoviesDataState, MoviesState } from "src/atom/MovieState";
-import { useRecoilState } from "recoil";
-import ReactPlayer from "react-player";
-import { URL } from "src/utils";
-import { Element } from "src/type";
-import Image from "next/image";
-import ModalFavorite from "./ModalFavorite";
-import { IconAccessPoint, IconAccessPointOff } from "@tabler/icons";
 import { Modal } from "@mantine/core";
+import { IconAccessPoint, IconAccessPointOff } from "@tabler/icons";
+import Image from "next/image";
 import Link from "next/link";
+import { FC, useEffect, useState } from "react";
+import ReactPlayer from "react-player";
+import { useRecoilState } from "recoil";
+import { MoviesDataState, MoviesState } from "src/atom/MovieState";
+import { Element } from "src/type";
+import { URL } from "src/utils";
+
+import ModalFavorite from "./ModalFavorite";
 
 const Modals: FC = () => {
   const [open, setOpen] = useRecoilState(MoviesState);
-  const [movies, setMovies] = useRecoilState(MoviesDataState);
+  const [moviesData, setMoviesData] = useRecoilState(MoviesDataState);
   const [data, setData] = useState("");
   const [muted, setMuted] = useState(false);
   const [home, setHome] = useState("");
@@ -31,13 +32,15 @@ const Modals: FC = () => {
 
   // 映画●ドラマのムービー取得してkeyをsetDataに入れる
   useEffect(() => {
-    if (!movies) return;
+    if (!moviesData) return;
 
     const WatchVideo = async () => {
       const data = await fetch(
-        `${URL}/${movies.title ? "movie" : "tv"}/${movies?.id}?api_key=${
-          process.env.NEXT_PUBLIC_API_KEY
-        }&language=${movies?.original_language}&append_to_response=videos`
+        `${URL}/${moviesData.title ? "movie" : "tv"}/${
+          moviesData?.id
+        }?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=${
+          moviesData?.original_language
+        }&append_to_response=videos`
       ).then((res) => res.json());
 
       setHome(data.homepage);
@@ -49,7 +52,7 @@ const Modals: FC = () => {
       }
     };
     WatchVideo();
-  }, [movies]);
+  }, [moviesData]);
 
   return (
     <div>
@@ -91,10 +94,10 @@ const Modals: FC = () => {
         )}
         {!data && (
           <div className="relative p-20 mt-7 mb-10  mx-auto w-1/3 h-56 ">
-            {movies?.poster_path || movies?.backdrop_path ? (
+            {moviesData?.poster_path || moviesData?.backdrop_path ? (
               <Image
                 src={`https://image.tmdb.org/t/p/w500${
-                  movies?.poster_path || movies?.backdrop_path
+                  moviesData?.poster_path || moviesData?.backdrop_path
                 }`}
                 layout="fill"
                 alt="error"
@@ -104,11 +107,13 @@ const Modals: FC = () => {
         )}
         <div className="relative  bottom-5">
           <h1 className="ml-4 text-base   mb-2 ">
-            {movies?.title || movies?.name}
+            {moviesData?.title || moviesData?.name}
           </h1>
           <div className="flex gap-x-3 ml-4">
-            {movies?.release_date ? <p>公開日{movies?.release_date}</p> : null}
-            <p>評価{movies?.vote_average}</p>
+            {moviesData?.release_date ? (
+              <p>公開日{moviesData?.release_date}</p>
+            ) : null}
+            <p>評価{moviesData?.vote_average}</p>
           </div>
           <div>
             <Link href={home} passHref>
@@ -120,7 +125,7 @@ const Modals: FC = () => {
               </a>
             </Link>
           </div>
-          <p className="text-xs md:text-xl ml-4 ">{movies?.overview}</p>
+          <p className="text-xs md:text-xl ml-4 ">{moviesData?.overview}</p>
         </div>
       </Modal>
     </div>

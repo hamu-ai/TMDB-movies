@@ -1,25 +1,25 @@
-import Link from "next/link";
-import { Menu, Text, Burger, Tabs } from "@mantine/core";
-import { useEffect, useState } from "react";
+import { Burger, Menu, Tabs, Text } from "@mantine/core";
 import {
-  IconSearch,
+  IconDeviceTv,
+  IconHeart,
   IconHome,
   IconMovie,
+  IconSearch,
   IconSettings,
   IconStar,
-  IconHeart,
-  IconDeviceTv,
 } from "@tabler/icons";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 
 const Nav = () => {
-  const [menu, setMenu] = useState(false);
+  const [isMenu, setIsMenu] = useState(false);
 
   useEffect(() => {
     const dd = window.outerWidth;
     if (dd < 740) {
-      setMenu(true);
+      setIsMenu(true);
     } else {
-      setMenu(false);
+      setIsMenu(false);
     }
   }, []);
 
@@ -29,7 +29,7 @@ const Nav = () => {
         <h1 className="font-bold text-2xl ">Movies</h1>
       </Link>
       <div className="flex  mt-2  ">
-        {menu === false ? (
+        {isMenu === false ? (
           <div className="flex gap-x-3 items-center ">
             <Tabs defaultValue="gallery">
               <Tabs.List>

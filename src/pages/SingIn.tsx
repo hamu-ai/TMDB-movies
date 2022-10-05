@@ -2,11 +2,12 @@ import { Button, Modal, PasswordInput, TextInput } from "@mantine/core";
 import { sendPasswordResetEmail } from "firebase/auth";
 import Image from "next/image";
 import { ReactElement, useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
 import Meta from "src/components/Meta";
 import { useAuth } from "src/hook/AuthContext";
 import { auth } from "src/lib/firebase";
+
 import { NextPageWithLayout } from "./_app";
 
 type Inputs = {

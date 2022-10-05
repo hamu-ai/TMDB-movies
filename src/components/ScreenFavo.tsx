@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { ActionIcon } from "@mantine/core";
+import { IconHeart, IconHeartOff } from "@tabler/icons";
 import {
   collection,
   deleteDoc,
@@ -7,21 +8,20 @@ import {
   onSnapshot,
   setDoc,
 } from "firebase/firestore";
+import { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { db } from "src/lib/firebase";
 import { useAuth } from "src/hook/AuthContext";
+import { db } from "src/lib/firebase";
 import { Movies } from "src/type";
-import { ActionIcon } from "@mantine/core";
-import { IconHeart, IconHeartOff } from "@tabler/icons";
 
 type Props = {
-  post?: Movies;
+  data?: Movies;
 };
 
-export const ScreenFavo: FC<Props> = ({ post }) => {
+export const ScreenFavo: FC<Props> = ({ data }) => {
   const { user } = useAuth();
-  const [add, setAdd] = useState(false);
-  const [movie, setMovie] = useState<Movies[]>([]);
+  const [hasData, setHasData] = useState(false);
+  const [movieData, setMovieData] = useState<Movies[]>([]);
 
   // firestoreのデータ取得
 
@@ -30,58 +30,60 @@ export const ScreenFavo: FC<Props> = ({ post }) => {
 
     const postData = collection(db, "movies", user!.uid, "movie");
     getDocs(postData).then((snapShot) => {
-      setMovie(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
+      setMovieData(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
     });
 
     onSnapshot(postData, (post) => {
-      setMovie(post.docs.map((doc) => ({ ...doc.data().movies })));
+      setMovieData(post.docs.map((doc) => ({ ...doc.data().movies })));
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [db, post?.id]);
+  }, [db, data?.id]);
 
   // 取得したデータの有無で　false ture　setAddに入れて返す
 
   useEffect(
     () => {
-      setAdd(movie.findIndex((result) => result.id === post?.id) !== -1);
+      setHasData(
+        movieData.findIndex((result) => result.id === data?.id) !== -1
+      );
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [movie]
+    [movieData]
   );
 
   const handleList = async () => {
-    if (add) {
+    if (hasData) {
       await deleteDoc(
-        doc(db, "movies", user!.uid, "movie", post?.id.toString()!)
+        doc(db, "movies", user!.uid, "movie", data?.id.toString()!)
       );
 
-      toast(`${post?.name || post?.title || post?.original_name} 削除`, {
+      toast(`${data?.name || data?.title || data?.original_name} 削除`, {
         duration: 2000,
       });
-      setAdd(false);
+      setHasData(false);
     } else {
       await setDoc(
-        doc(db, "movies", user!.uid, "movie", post?.id.toString()!),
+        doc(db, "movies", user!.uid, "movie", data?.id.toString()!),
         {
-          movies: post,
+          movies: data,
         }
       );
 
       toast(
-        `${post?.name || post?.title || post?.original_name} 
+        `${data?.name || data?.title || data?.original_name} 
           登録`,
         {
           duration: 2000,
         }
       );
-      setAdd(true);
+      setHasData(true);
     }
   };
   return (
     <div>
       <div onClick={handleList}>
-        {add ? (
+        {hasData ? (
           <ActionIcon
             variant="filled"
             className="bg-orange-500 hover:bg-orange-500 "

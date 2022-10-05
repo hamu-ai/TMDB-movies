@@ -1,27 +1,27 @@
-import { FC, useEffect } from "react";
-import { useState } from "react";
-import { Movies } from "src/type";
+import { Button, Pagination, TextInput } from "@mantine/core";
+import { IconSearch } from "@tabler/icons";
+import { FC, Suspense, useEffect, useState } from "react";
+import { useRecoilState, useRecoilValue } from "recoil";
 import {
   MoviesState,
   SearchDeliberation,
   SearchState,
 } from "src/atom/MovieState";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { Movies } from "src/type";
+
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
-import { Button, Pagination, TextInput } from "@mantine/core";
-import { IconSearch } from "@tabler/icons";
 
 const TvSearch: FC = () => {
   const deliberation = useRecoilValue(SearchDeliberation);
   const TV = useRecoilValue(MoviesState);
 
   const [text, setText] = useState("鬼滅");
-  const [show, setShow] = useState<Movies[]>([]);
+  const [movieData, setMovieData] = useState<Movies[]>([]);
   const [search, setSearch] = useRecoilState(SearchState);
 
   const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
 
   // TV　movie のデータを発見できるAPI
 
@@ -32,8 +32,8 @@ const TvSearch: FC = () => {
       );
       const res = await data.json();
 
-      setTotal(res.total_pages);
-      setShow(res.results);
+      setTotalPage(res.total_pages);
+      setMovieData(res.results);
     } catch (error) {
       console.log(error);
     }
@@ -45,11 +45,11 @@ const TvSearch: FC = () => {
   }, [page]);
 
   return (
-    <div className=" relative top-10    ">
+    <div className=" relative top-10">
       <div className="flex justify-center  gap-x-5">
         <Button
           className={`${
-            search === true ? " px-4 SearcTrue " : "  px-4  relative top-3"
+            search === true ? "px-4 SearcTrue" : "px-4 relative top-3"
           } `}
           onClick={() => setSearch(true)}
         >
@@ -58,13 +58,15 @@ const TvSearch: FC = () => {
 
         <Button
           className={`${
-            search === false ? "  px-4 SearcTrue " : "  px-4   relative top-3"
+            search === false ? "px-4 SearcTrue " : "px-4 relative top-3"
           } `}
           onClick={() => setSearch(false)}
         >
           映画
         </Button>
       </div>
+
+      {/* 　検索　 */}
       <div className="relative top-7  ">
         <div className="flex justify-center gap-x-2">
           <TextInput
@@ -82,9 +84,11 @@ const TvSearch: FC = () => {
           </Button>
         </div>
       </div>
+
+      {/* 　ページネーション　 */}
       <div className="relative top-10  flex justify-center">
         <Pagination
-          total={total}
+          total={totalPage}
           styles={(theme) => ({
             item: {
               "&[data-active]": {
@@ -101,11 +105,14 @@ const TvSearch: FC = () => {
         />
       </div>
 
-      <div className="relative top-14   Searchgrid  gap-5 mb-36  mx-2">
-        {show?.map((shows) => (
-          <SearcMap key={shows.id} shows={shows} />
-        ))}
-      </div>
+      <Suspense fallback={<p>Loading...</p>}>
+        <div className="relative top-14   Searchgrid  gap-5 mb-36  mx-2">
+          {movieData?.map((movie) => (
+            <SearcMap key={movie.id} shows={movie} />
+          ))}
+        </div>
+      </Suspense>
+
       {TV && <Modals />}
     </div>
   );

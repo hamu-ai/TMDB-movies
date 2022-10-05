@@ -1,4 +1,5 @@
-import { FC, useEffect, useState } from "react";
+import { ActionIcon } from "@mantine/core";
+import { IconHeart, IconHeartOff } from "@tabler/icons";
 import {
   collection,
   deleteDoc,
@@ -6,26 +7,25 @@ import {
   getDocs,
   setDoc,
 } from "firebase/firestore";
+import { FC, useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { db } from "src/lib/firebase";
-import { MoviesDataState } from "src/atom/MovieState";
 import { useRecoilState } from "recoil";
+import { MoviesDataState } from "src/atom/MovieState";
 import { useAuth } from "src/hook/AuthContext";
+import { db } from "src/lib/firebase";
 import { Movies } from "src/type";
-import { ActionIcon } from "@mantine/core";
-import { IconHeart, IconHeartOff } from "@tabler/icons";
 
 const ModalFavorite: FC = () => {
   const [movies, setMovies] = useRecoilState(MoviesDataState);
   const { user } = useAuth();
   const [add, setAdd] = useState(false);
-  const [movie, setMovie] = useState<Movies[]>([]);
+  const [movieData, setMovieData] = useState<Movies[]>([]);
 
   useEffect(() => {
     if (user) {
       const postData = collection(db, "movies", user!.uid, "movie");
       getDocs(postData).then((snapShot) => {
-        setMovie(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
+        setMovieData(snapShot.docs.map((doc) => ({ ...doc.data().movies })));
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -35,11 +35,11 @@ const ModalFavorite: FC = () => {
 
   useEffect(
     () => {
-      setAdd(movie.findIndex((result) => result.id === movies?.id) !== -1);
+      setAdd(movieData.findIndex((result) => result.id === movies?.id) !== -1);
     },
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [movie]
+    [movieData]
   );
 
   const handleList = async () => {

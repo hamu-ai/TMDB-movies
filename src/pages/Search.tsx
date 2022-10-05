@@ -1,7 +1,7 @@
 import { NextPage } from "next";
-import TvSearch from "src/components/Search";
 import { Toaster } from "react-hot-toast";
 import Meta from "src/components/Meta";
+import TvSearch from "src/components/Search";
 
 const Search: NextPage = () => {
   return (

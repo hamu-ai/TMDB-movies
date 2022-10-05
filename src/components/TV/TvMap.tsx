@@ -1,8 +1,9 @@
-import { FC } from "react";
 import Image from "next/image";
+import { FC } from "react";
 import { useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
+
 import { ScreenFavo } from "../ScreenFavo";
 
 type Props = {
@@ -10,13 +11,13 @@ type Props = {
 };
 
 const TvMap: FC<Props> = ({ tv }) => {
-  const setMovies = useSetRecoilState(MoviesDataState);
+  const setMoviesData = useSetRecoilState(MoviesDataState);
   const setOpen = useSetRecoilState(MoviesState);
   return (
     <div className="relative mx-auto mb-3">
       <div
         onClick={() => {
-          setMovies(tv);
+          setMoviesData(tv);
           setOpen(true);
         }}
         className="relative p-6   border-solid border-white bg-gray-500 hover:bg-black  Transition "
@@ -36,7 +37,7 @@ const TvMap: FC<Props> = ({ tv }) => {
         </div>
       </div>
       <div className="absolute right-7 bottom-6  ">
-        <ScreenFavo post={tv} />
+        <ScreenFavo data={tv} />
       </div>
     </div>
   );

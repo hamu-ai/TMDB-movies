@@ -1,10 +1,12 @@
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
 import Image from "next/image";
 import { FC, useRef, useState } from "react";
-import { Movies } from "src/type";
-import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { useSetRecoilState } from "recoil";
+import { MoviesDataState, MoviesState } from "src/atom/MovieState";
+import { Movies } from "src/type";
+
 import { ScreenFavo } from "./ScreenFavo";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons";
+
 type Props = {
   title?: string;
   movie: Movies[];
@@ -22,10 +24,13 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
     if (ref.current) {
       const { scrollLeft, clientWidth, scrollWidth } = ref.current;
 
+      // どれだけスクロールするか
       const scrollTo =
         direction === "left"
           ? scrollLeft - clientWidth
           : scrollLeft + clientWidth;
+
+      const ScrollMaxX = scrollWidth - clientWidth;
 
       if (scrollTo > 0) {
         setLeft(true);
@@ -33,20 +38,19 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
         setLeft(false);
       }
 
-      const ScrollMaxX = scrollWidth - clientWidth;
-
       if (scrollTo > ScrollMaxX) {
         setRight(false);
       } else {
         setRight(true);
       }
 
+      // 指定された要素 scrollToだけスクロールさせる
       ref.current.scrollTo({ left: scrollTo, behavior: "smooth" });
     }
   };
 
   return (
-    <div className=" text-2xl md:text-3xl ml-3    ">
+    <div className=" text-2xl md:text-3xl ml-3 ">
       <p className=" text-white ">{title}</p>
       <div ref={ref} className="flex   overflow-x-scroll scrollbar-hide my-5 ">
         {movie.map((movies) => {
@@ -69,7 +73,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                 />
               </div>
               <div className="absolute right-0 top-0">
-                <ScreenFavo post={movies} />
+                <ScreenFavo data={movies} />
               </div>
             </div>
           );

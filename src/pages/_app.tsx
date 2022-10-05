@@ -1,11 +1,12 @@
 import "src/styles/globals.css";
-import type { AppProps } from "next/app";
-import { RecoilRoot } from "recoil";
-import AuthProvider from "src/hook/AuthContext";
-import Heder from "src/components/Heder";
-import { NextPage } from "next";
-import { ReactElement, ReactNode } from "react";
+
 import { MantineProvider } from "@mantine/core";
+import { NextPage } from "next";
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode } from "react";
+import { RecoilRoot } from "recoil";
+import Heder from "src/components/Heder";
+import AuthProvider from "src/hook/AuthContext";
 
 //　ページごとのレイアウト
 export type NextPageWithLayout = NextPage & {
