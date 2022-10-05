@@ -1,0 +1,8 @@
+.next
+postcss.config.js
+README.md
+.eslintrc.json
+package-lock.json
+package.json
+next.config.js
+next-env.d.ts
