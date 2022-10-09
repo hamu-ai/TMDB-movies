@@ -6,3 +6,6 @@ package-lock.json
 package.json
 next.config.js
 next-env.d.ts
+src\styles\globals.css
+tailwind.config.js
+tsconfig.json 
