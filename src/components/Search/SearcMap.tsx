@@ -29,17 +29,17 @@ export const SearcMap: FC<Props> = ({ shows }) => {
             layout="fill"
             alt={`${shows.name || shows.title}`}
           />
-          <p className="absolute top-0 m-0 bg-black bg-opacity-50 text-white">
+          <p className="absolute top-0 m-0 bg-black bg-opacity-50 ">
             {shows?.name || shows?.title}
           </p>
           {shows.vote_average ? (
-            <p className="absolute right-0 bottom-0 m-0 text-white bg-orange-600 rounded-lg ">
+            <p className="absolute right-0 bottom-0 m-0  bg-orange-600 rounded-lg ">
               評価{shows.vote_average}
             </p>
           ) : null}
         </>
       ) : (
-        <div className="text-white">{shows.name || shows.title}</div>
+        <div>{shows.name || shows.title}</div>
       )}
     </div>
   );

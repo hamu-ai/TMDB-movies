@@ -15,8 +15,8 @@ const Nav = () => {
   const [isMenu, setIsMenu] = useState(false);
 
   useEffect(() => {
-    const dd = window.outerWidth;
-    if (dd < 740) {
+    const Width = window.outerWidth;
+    if (Width < 740) {
       setIsMenu(true);
     } else {
       setIsMenu(false);
@@ -34,31 +34,51 @@ const Nav = () => {
             <Tabs defaultValue="gallery">
               <Tabs.List>
                 <Link href="/">
-                  <Tabs.Tab value="ホーム" icon={<IconHome size={20} />}>
+                  <Tabs.Tab
+                    value="ホーム"
+                    icon={<IconHome size={20} />}
+                    className="text-white"
+                  >
                     ホーム
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/tv/1">
-                  <Tabs.Tab value="TV" icon={<IconDeviceTv size={20} />}>
+                  <Tabs.Tab
+                    value="TV"
+                    icon={<IconDeviceTv size={20} />}
+                    className="text-white"
+                  >
                     TV
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Search">
-                  <Tabs.Tab value="Search" icon={<IconSearch size={20} />}>
+                  <Tabs.Tab
+                    value="Search"
+                    icon={<IconSearch size={20} />}
+                    className="text-white"
+                  >
                     検索
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/favorite">
-                  <Tabs.Tab value="お気に入り" icon={<IconHeart size={20} />}>
+                  <Tabs.Tab
+                    value="お気に入り"
+                    icon={<IconHeart size={20} />}
+                    className="text-white"
+                  >
                     お気に入り
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Setting">
-                  <Tabs.Tab value="設定" icon={<IconSettings size={20} />}>
+                  <Tabs.Tab
+                    value="設定"
+                    icon={<IconSettings size={20} />}
+                    className="text-white"
+                  >
                     設定
                   </Tabs.Tab>
                 </Link>
@@ -97,7 +117,9 @@ const Nav = () => {
                 </Link>
 
                 <Link href="/Setting">
-                  <Menu.Item icon={<IconSettings size={14} />}>設定</Menu.Item>
+                  <Menu.Item icon={<IconSettings size={14} />}>
+                    Setting
+                  </Menu.Item>
                 </Link>
                 <Menu.Divider />
               </Menu.Dropdown>

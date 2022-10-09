@@ -30,7 +30,7 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
           alt="ss"
         />
       </div>
-      <div className="text-white ">
+      <div>
         <h1 className="text-xl   md:text-2xl  ">
           {movieData?.title || movieData?.original_title}
         </h1>

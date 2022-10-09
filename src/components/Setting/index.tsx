@@ -13,7 +13,7 @@ import SettingUpdata from "./SettingUpdata";
 const SettingPage: FC = () => {
   const { singOut, user } = useAuth();
   const [profile, setProfile] = useState("");
-  const [settingEmail, setSettingEmail] = useRecoilState(SettingState);
+  const [settingEmail] = useRecoilState(SettingState);
   const [update, setUpdate] = useState(false);
   const setCertification = useSetRecoilState(SettingConfirmation);
 
@@ -37,7 +37,7 @@ const SettingPage: FC = () => {
 
         {/*   　メールアドレス変更     */}
         <Button
-          className=" top-6 bg-gray-500 hover:bg-gray-700 text-white font-bold cursor-pointer block "
+          className=" top-6 bg-gray-500 hover:bg-gray-700  font-bold cursor-pointer block "
           onClick={() => {
             setCertification(true);
             setUpdate(true);
@@ -48,7 +48,7 @@ const SettingPage: FC = () => {
 
         {/*   　パスワード変更      */}
         <Button
-          className=" text-white bg-gray-500 hover:bg-gray-700 font-bold  cursor-pointer  "
+          className="  bg-gray-500 hover:bg-gray-700 font-bold  cursor-pointer  "
           onClick={() => {
             setCertification(true);
             setUpdate(false);

@@ -4,7 +4,7 @@ import { useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 
-import { ScreenFavo } from "../ScreenFavo";
+import { DeleteRegistration } from "../DeleteRegistration";
 
 type Props = {
   tv: Movies;
@@ -22,9 +22,7 @@ const TvMap: FC<Props> = ({ tv }) => {
         }}
         className="relative p-6   border-solid border-white bg-gray-500 hover:bg-black  Transition "
       >
-        <p className="absolute top-0 text-white   text-sm lg:text-md">
-          {tv.name}
-        </p>
+        <p className="absolute top-0  text-sm lg:text-md">{tv.name}</p>
         <div className="relative  h-56 w-52 md:w-40  mt-7  ">
           <Image
             src={`https://image.tmdb.org/t/p/w500${
@@ -37,7 +35,7 @@ const TvMap: FC<Props> = ({ tv }) => {
         </div>
       </div>
       <div className="absolute right-7 bottom-6  ">
-        <ScreenFavo data={tv} />
+        <DeleteRegistration data={tv} />
       </div>
     </div>
   );

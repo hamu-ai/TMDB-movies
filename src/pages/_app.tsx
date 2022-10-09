@@ -32,6 +32,11 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       withGlobalStyles
       withNormalizeCSS
       theme={{
+        globalStyles: (theme) => ({
+          body: {
+            color: "white",
+          },
+        }),
         /** Put your mantine theme override here */
         colorScheme: "dark",
       }}

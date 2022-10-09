@@ -81,7 +81,7 @@ const Sngin: NextPageWithLayout = () => {
         />
         {errors.password && (
           <p className="text-red-600 cursor-default">
-            6文字以上のパスワードを入力してください
+            6桁以上のパスワードを入力してください
           </p>
         )}
 
@@ -95,7 +95,7 @@ const Sngin: NextPageWithLayout = () => {
 
         {/*    パスワード再設定の処理    */}
         <p
-          className="text-sm m-0 text-right font-bold cursor-pointer "
+          className="text-sm m-0 text-right font-bold cursor-pointer text-blue-400 hover:text-blue-500"
           onClick={() => setOpened(true)}
         >
           パスワード忘れた場合
@@ -120,8 +120,8 @@ const Sngin: NextPageWithLayout = () => {
         </Modal>
 
         {/*    サインアップ    */}
-        <div className="flex gap-x-2 ">
-          {"アカウントない場合"}
+        <div className="flex gap-x-2 items-center">
+          <p className="text-red-600 font-bold"> アカウントない場合</p>
           <button
             className="cursor-pointer text-red-700 hover:text-red-500"
             onClick={() => setLogin(false)}
