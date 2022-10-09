@@ -5,7 +5,7 @@ import { useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
 import { Movies } from "src/type";
 
-import { ScreenFavo } from "./ScreenFavo";
+import { DeleteRegistration } from "./DeleteRegistration";
 
 type Props = {
   title?: string;
@@ -51,7 +51,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
 
   return (
     <div className=" text-2xl md:text-3xl ml-3 ">
-      <p className=" text-white ">{title}</p>
+      <p className="bg-gray-400 max-w-fit bg-opacity-40">{title}</p>
       <div ref={ref} className="flex   overflow-x-scroll scrollbar-hide my-5 ">
         {movie.map((movies) => {
           return (
@@ -73,7 +73,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                 />
               </div>
               <div className="absolute right-0 top-0">
-                <ScreenFavo data={movies} />
+                <DeleteRegistration data={movies} />
               </div>
             </div>
           );

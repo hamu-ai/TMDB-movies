@@ -6,20 +6,22 @@ import { FC, useEffect, useState } from "react";
 import ReactPlayer from "react-player";
 import { useRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
-import { Element } from "src/type";
+import { Element, Movies } from "src/type";
 import { URL } from "src/utils";
 
-import ModalFavorite from "./ModalFavorite";
+import { DeleteRegistration } from "./DeleteRegistration";
 
 const Modals: FC = () => {
   const [open, setOpen] = useRecoilState(MoviesState);
-  const [moviesData, setMoviesData] = useRecoilState(MoviesDataState);
+  const [moviesData] = useRecoilState(MoviesDataState);
   const [data, setData] = useState("");
   const [muted, setMuted] = useState(false);
   const [home, setHome] = useState("");
+  const [extract_Movie, setExtract_Movie] = useState<Movies | null>(null);
 
   const [beside, setBeside] = useState(1);
 
+  //　Modleの横幅
   useEffect(() => {
     if (window.outerWidth > 1000) {
       setBeside(1);
@@ -33,6 +35,7 @@ const Modals: FC = () => {
   // 映画●ドラマのムービー取得してkeyをsetDataに入れる
   useEffect(() => {
     if (!moviesData) return;
+    setExtract_Movie(moviesData);
 
     const WatchVideo = async () => {
       const data = await fetch(
@@ -81,7 +84,9 @@ const Modals: FC = () => {
 
             <div className="flex  relative bottom-6 md:bottom-3">
               <div className="relative  ml-6">
-                <ModalFavorite />
+                {extract_Movie ? (
+                  <DeleteRegistration data={extract_Movie} />
+                ) : null}
               </div>
               <button
                 onClick={() => setMuted(!muted)}

@@ -3,18 +3,17 @@ import { NextPage } from "next";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { MoviesDataState, MoviesState } from "src/atom/MovieState";
+import { DeleteRegistration } from "src/components/DeleteRegistration";
 import Meta from "src/components/Meta";
 import Modals from "src/components/Modal";
-import { ScreenFavo } from "src/components/ScreenFavo";
 import { useAuth } from "src/hook/AuthContext";
 import { db } from "src/lib/firebase";
 import { Movies } from "src/type";
 
 const Favorite: NextPage = () => {
-  const movieModal = useRecoilValue(MoviesState);
-  const setOpen = useSetRecoilState(MoviesState);
+  const [open, setOpen] = useRecoilState(MoviesState);
   const setMovies = useSetRecoilState(MoviesDataState);
   const [movieData, setMovieData] = useState<Movies[]>([]);
   const { user } = useAuth();
@@ -39,13 +38,19 @@ const Favorite: NextPage = () => {
       <div className="relative top-5  Favorite gap-4  mx-2 mb-80  ">
         {movieData.map((data) => {
           return (
-            <div key={data.id} className="relative Transition ">
+            <div
+              key={data.id}
+              className="relative Transition border-solid border-white "
+            >
+              <p className=" m-0 text-sm ">
+                {data.title || data.original_title || data.name}
+              </p>
               <div
                 onClick={() => {
                   setOpen(true);
                   setMovies(data);
                 }}
-                className="relative w-full h-40 md:h-48 border-solid border-white  "
+                className="relative w-full h-40 md:h-48 "
               >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${
@@ -54,18 +59,15 @@ const Favorite: NextPage = () => {
                   layout="fill"
                   alt="error"
                 />
-                <p className="absolute top-0 bg-opacity-50 m-0 bg-black  text-sm text-white ">
-                  {data.title || data.original_title || data.name}
-                </p>
               </div>
               <div className="absolute bottom-0 right-0 ">
-                <ScreenFavo data={data} />
+                <DeleteRegistration data={data} />
               </div>
             </div>
           );
         })}
       </div>
-      {movieModal && <Modals />}
+      {open && <Modals />}
     </div>
   );
 };
