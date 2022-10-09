@@ -1,4 +1,5 @@
 import type { NextPage } from "next";
+import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { MoviesState } from "src/atom/MovieState";
@@ -27,6 +28,13 @@ const Home: NextPage<Props> = ({
   //　モーダルを開くたびにレンダリングさせる
   const movieModal = useRecoilValue(MoviesState);
 
+  //　マウント時にデータを再検証
+  useEffect(() => {
+    const revalidate = () => {
+      fetch("/api/revalidate");
+    };
+    revalidate();
+  }, []);
   return (
     <div>
       <Meta
@@ -48,25 +56,29 @@ const Home: NextPage<Props> = ({
   );
 };
 
-export const getServerSideProps = async () => {
-  const [comingSoon, TopRating, popular, fetchtrend, comingSoon2] =
-    await Promise.all([
-      fetch(response.fetchcomingSoon).then((res) => res.json()),
-      fetch(response.fetchcomingSoon2).then((res) => res.json()),
-      fetch(response.fetchTopRating).then((res) => res.json()),
-      fetch(response.fetchpopular).then((res) => res.json()),
-      fetch(response.fetchtrend).then((res) => res.json()),
-    ]);
+export const getStaticProps = async () => {
+  try {
+    const [comingSoon, TopRating, popular, fetchtrend, comingSoon2] =
+      await Promise.all([
+        fetch(response.fetchcomingSoon).then((res) => res.json()),
+        fetch(response.fetchcomingSoon2).then((res) => res.json()),
+        fetch(response.fetchTopRating).then((res) => res.json()),
+        fetch(response.fetchpopular).then((res) => res.json()),
+        fetch(response.fetchtrend).then((res) => res.json()),
+      ]);
 
-  return {
-    props: {
-      comingSoon: comingSoon.results,
-      comingSoon2: comingSoon2.results,
-      TopRating: TopRating.results,
-      popular: popular.results,
-      fetchtrend: fetchtrend.results,
-    },
-  };
+    return {
+      props: {
+        comingSoon: comingSoon.results,
+        comingSoon2: comingSoon2.results,
+        TopRating: TopRating.results,
+        popular: popular.results,
+        fetchtrend: fetchtrend.results,
+      },
+    };
+  } catch (error) {
+    console.log("error");
+  }
 };
 
 export default Home;
