@@ -1,6 +1,11 @@
 import "src/styles/globals.css";
 
-import { MantineProvider } from "@mantine/core";
+import {
+  ColorScheme,
+  ColorSchemeProvider,
+  MantineProvider,
+} from "@mantine/core";
+import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { ReactElement, ReactNode } from "react";
@@ -18,6 +23,19 @@ type AppPropsWithLayout = AppProps & {
 };
 
 export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
+  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
+    key: "mantine-color-scheme",
+    defaultValue: "dark",
+    getInitialValueInEffect: true,
+  });
+
+  // ダークモード　ライトモード切り替えの関数
+  const toggleColorScheme = (value?: ColorScheme) =>
+    setColorScheme(value || (colorScheme === "dark" ? "light" : "dark"));
+
+  // ホットキーの使用
+  useHotkeys([["mod+J", () => toggleColorScheme()]]);
+
   if (Component.getLayout) {
     return Component.getLayout(
       <RecoilRoot>
@@ -28,25 +46,31 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
     );
   }
   return (
-    <MantineProvider
-      withGlobalStyles
-      withNormalizeCSS
-      theme={{
-        globalStyles: (theme) => ({
-          body: {
-            color: "white",
-          },
-        }),
-        /** Put your mantine theme override here */
-        colorScheme: "dark",
-      }}
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
     >
-      <RecoilRoot>
-        <AuthProvider>
-          <Heder />
-          <Component {...pageProps} />
-        </AuthProvider>
-      </RecoilRoot>
-    </MantineProvider>
+      <MantineProvider
+        withGlobalStyles
+        withNormalizeCSS
+        theme={{
+          globalStyles: (theme) => ({
+            body: {
+              color:
+                theme.colorScheme === "dark" ? theme.white : theme.colors.dark,
+            },
+          }),
+          /** Put your mantine theme override here */
+          colorScheme,
+        }}
+      >
+        <RecoilRoot>
+          <AuthProvider>
+            <Heder />
+            <Component {...pageProps} />
+          </AuthProvider>
+        </RecoilRoot>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 }

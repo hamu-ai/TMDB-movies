@@ -111,7 +111,7 @@ const Modals: FC = () => {
           </div>
         )}
         <div className="relative  bottom-5">
-          <h1 className="ml-4 text-base   mb-2 ">
+          <h1 className="ml-4 text-base mt-6  mb-2 ">
             {moviesData?.title || moviesData?.name}
           </h1>
           <div className="flex gap-x-3 ml-4">
