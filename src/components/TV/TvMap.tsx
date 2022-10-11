@@ -20,7 +20,7 @@ const TvMap: FC<Props> = ({ tv }) => {
           setMoviesData(tv);
           setOpen(true);
         }}
-        className="relative p-6   border-solid border-white bg-gray-500 hover:bg-black  Transition "
+        className="relative p-6 border-solid border-gray-500 bg-gray-500 Transition "
       >
         <p className="absolute top-0  text-sm lg:text-md">{tv.name}</p>
         <div className="relative  h-56 w-52 md:w-40  mt-7  ">
@@ -28,7 +28,7 @@ const TvMap: FC<Props> = ({ tv }) => {
             src={`https://image.tmdb.org/t/p/w500${
               tv.poster_path || tv.backdrop_path
             }`}
-            className="rounded-sm  "
+            className="rounded-sm "
             layout="fill"
             alt="error Image"
           />

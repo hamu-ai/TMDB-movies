@@ -27,11 +27,11 @@ const BackImage: FC<Props> = ({ comingSoon }) => {
             movieData?.backdrop_path || movieData?.poster_path
           }`}
           objectFit="cover"
-          alt="ss"
+          alt="error"
         />
       </div>
-      <div>
-        <h1 className="text-xl   md:text-2xl  ">
+      <div className="text-white">
+        <h1 className="text-xl md:text-2xl">
           {movieData?.title || movieData?.original_title}
         </h1>
         <p className="text-sm md:text-md  max-w-md  md:max-w-lg  lg:max-w-xl">

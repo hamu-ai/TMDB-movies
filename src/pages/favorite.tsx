@@ -40,9 +40,9 @@ const Favorite: NextPage = () => {
           return (
             <div
               key={data.id}
-              className="relative Transition border-solid border-white "
+              className="relative Transition border-solid border-gray-500 "
             >
-              <p className=" m-0 text-sm ">
+              <p className=" m-0  bg-black text-gray-300 ">
                 {data.title || data.original_title || data.name}
               </p>
               <div

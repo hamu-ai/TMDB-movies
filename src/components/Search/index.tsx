@@ -16,7 +16,7 @@ const TvSearch: FC = () => {
   const deliberation = useRecoilValue(SearchDeliberation);
   const TV = useRecoilValue(MoviesState);
 
-  const [text, setText] = useState("鬼滅");
+  const [text, setText] = useState("ヴァイオレット");
   const [movieData, setMovieData] = useState<Movies[]>([]);
   const [search, setSearch] = useRecoilState(SearchState);
 

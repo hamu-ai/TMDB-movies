@@ -51,8 +51,8 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
 
   return (
     <div className=" text-2xl md:text-3xl ml-3 ">
-      <p className="bg-gray-400 max-w-fit bg-opacity-40">{title}</p>
-      <div ref={ref} className="flex   overflow-x-scroll scrollbar-hide my-5 ">
+      <p className="text-red-300">{title}</p>
+      <div ref={ref} className="flex overflow-x-scroll scrollbar-hide my-5 ">
         {movie.map((movies) => {
           return (
             <div key={movies.id} className="mx-1 relative">
@@ -61,7 +61,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
                   setOpen(true);
                   setMovies(movies);
                 }}
-                className="relative md:h-40   md:px-20 h-20 w-20  px-20  "
+                className="relative md:h-40 md:px-20 h-20 w-20 px-20 border-solid border-gray-500  "
               >
                 <Image
                   src={`https://image.tmdb.org/t/p/w500${

@@ -29,7 +29,11 @@ const SettingPage: FC = () => {
     <div className=" flex flex-col h-screen  justify-center max-w-lg mx-auto">
       <Meta title="設定" />
       <Toaster />
-      <Paper shadow="xs" p="xl" className=" space-y-10 bg-white  ">
+      <Paper
+        shadow="xs"
+        p="xl"
+        className=" space-y-10 bg-white border-solid border-black "
+      >
         <div className="flex space-x-4 text-black text-sm md:text-md lg:text-lg">
           <p>メールアドレス</p>
           <p>{profile}</p>
