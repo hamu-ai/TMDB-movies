@@ -1,22 +1,34 @@
-import { Burger, Menu, Tabs, Text } from "@mantine/core";
+import {
+  ActionIcon,
+  Burger,
+  HoverCard,
+  Menu,
+  Tabs,
+  Text,
+  useMantineColorScheme,
+} from "@mantine/core";
 import {
   IconDeviceTv,
   IconHeart,
   IconHome,
+  IconMoonStars,
   IconMovie,
   IconSearch,
   IconSettings,
   IconStar,
+  IconSun,
 } from "@tabler/icons";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const Nav = () => {
   const [isMenu, setIsMenu] = useState(false);
+  const { colorScheme, toggleColorScheme } = useMantineColorScheme();
+  const dark = colorScheme === "dark";
 
   useEffect(() => {
     const Width = window.outerWidth;
-    if (Width < 740) {
+    if (Width < 810) {
       setIsMenu(true);
     } else {
       setIsMenu(false);
@@ -28,7 +40,7 @@ const Nav = () => {
       <Link href="/">
         <h1 className="font-bold text-2xl ">Movies</h1>
       </Link>
-      <div className="flex  mt-2  ">
+      <div className="flex mt-2">
         {isMenu === false ? (
           <div className="flex gap-x-3 items-center ">
             <Tabs defaultValue="gallery">
@@ -37,7 +49,7 @@ const Nav = () => {
                   <Tabs.Tab
                     value="ホーム"
                     icon={<IconHome size={20} />}
-                    className="text-white"
+                    className=""
                   >
                     ホーム
                   </Tabs.Tab>
@@ -47,7 +59,7 @@ const Nav = () => {
                   <Tabs.Tab
                     value="TV"
                     icon={<IconDeviceTv size={20} />}
-                    className="text-white"
+                    className=""
                   >
                     TV
                   </Tabs.Tab>
@@ -57,7 +69,7 @@ const Nav = () => {
                   <Tabs.Tab
                     value="Search"
                     icon={<IconSearch size={20} />}
-                    className="text-white"
+                    className=""
                   >
                     検索
                   </Tabs.Tab>
@@ -67,7 +79,7 @@ const Nav = () => {
                   <Tabs.Tab
                     value="お気に入り"
                     icon={<IconHeart size={20} />}
-                    className="text-white"
+                    className=""
                   >
                     お気に入り
                   </Tabs.Tab>
@@ -77,7 +89,7 @@ const Nav = () => {
                   <Tabs.Tab
                     value="設定"
                     icon={<IconSettings size={20} />}
-                    className="text-white"
+                    className=""
                   >
                     設定
                   </Tabs.Tab>
@@ -126,6 +138,27 @@ const Nav = () => {
             </Menu>
           </>
         )}
+
+        {/* ダークモード　ライトモード切り替え */}
+        <HoverCard width={80} shadow="md">
+          <HoverCard.Target>
+            <ActionIcon
+              variant="outline"
+              color={dark ? "yellow" : "blue"}
+              onClick={() => toggleColorScheme()}
+              title="Toggle color scheme"
+              className="mt-1 ml-4 "
+            >
+              {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
+            </ActionIcon>
+          </HoverCard.Target>
+
+          <HoverCard.Dropdown className="bg-black border border-black">
+            <Text size="sm" className="text-blue-200">
+              Ctrl + j
+            </Text>
+          </HoverCard.Dropdown>
+        </HoverCard>
       </div>
     </div>
   );
