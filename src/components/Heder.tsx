@@ -20,7 +20,7 @@ const Heder: FC = () => {
     ${
       isScroll
         ? "bg-red-600 text-white"
-        : "bg-orange-400  bg-opacity-50 text-red-600"
+        : "bg-red-400  bg-opacity-50 text-red-600"
     } 
     flex w-screen  h-10 p-10 items-center  fixed z-10  `}
     >
