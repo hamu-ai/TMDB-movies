@@ -1,7 +1,6 @@
 import {
   ActionIcon,
   Burger,
-  HoverCard,
   Menu,
   Tabs,
   Text,
@@ -140,25 +139,16 @@ const Nav = () => {
         )}
 
         {/* ダークモード　ライトモード切り替え */}
-        <HoverCard width={80} shadow="md">
-          <HoverCard.Target>
-            <ActionIcon
-              variant="outline"
-              color={dark ? "yellow" : "blue"}
-              onClick={() => toggleColorScheme()}
-              title="Toggle color scheme"
-              className="mt-1 ml-4 "
-            >
-              {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
-            </ActionIcon>
-          </HoverCard.Target>
 
-          <HoverCard.Dropdown className="bg-black border border-black">
-            <Text size="sm" className="text-blue-200">
-              Ctrl + j
-            </Text>
-          </HoverCard.Dropdown>
-        </HoverCard>
+        <ActionIcon
+          variant="outline"
+          color={dark ? "yellow" : "blue"}
+          onClick={() => toggleColorScheme()}
+          title="Toggle color scheme"
+          className="mt-1 ml-4 "
+        >
+          {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
+        </ActionIcon>
       </div>
     </div>
   );
