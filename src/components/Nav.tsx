@@ -27,7 +27,7 @@ const Nav = () => {
 
   useEffect(() => {
     const Width = window.outerWidth;
-    if (Width < 810) {
+    if (Width < 850) {
       setIsMenu(true);
     } else {
       setIsMenu(false);
@@ -35,9 +35,9 @@ const Nav = () => {
   }, []);
 
   return (
-    <div className="flex  gap-x-7 items-center cursor-pointer  ">
+    <div className="flex gap-x-7 items-center w-screen ">
       <Link href="/">
-        <h1 className="font-bold text-2xl ">Movies</h1>
+        <h1 className="font-bold text-2xl cursor-pointer  ">Movies</h1>
       </Link>
       <div className="flex mt-2">
         {isMenu === false ? (
@@ -137,15 +137,16 @@ const Nav = () => {
             </Menu>
           </>
         )}
+      </div>
 
-        {/* ダークモード　ライトモード切り替え */}
-
+      {/* ダークモード　ライトモード切り替え */}
+      <div className="flex-1 flex justify-end">
         <ActionIcon
           variant="outline"
           color={dark ? "yellow" : "blue"}
           onClick={() => toggleColorScheme()}
           title="Toggle color scheme"
-          className="mt-1 ml-4 "
+          className="mt-2 mr-10 "
         >
           {dark ? <IconSun size={20} /> : <IconMoonStars size={20} />}
         </ActionIcon>
