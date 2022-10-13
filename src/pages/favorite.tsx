@@ -38,30 +38,30 @@ const Favorite: NextPage = () => {
       <div className="relative top-5  Favorite gap-4  mx-2 mb-80  ">
         {movieData.map((data) => {
           return (
-            <div
-              key={data.id}
-              className="relative Transition border-solid border-gray-500 "
-            >
-              <p className=" m-0  bg-black text-gray-300 ">
+            <div key={data.id} className="Transition">
+              <p className=" m-0 text-sm ">
                 {data.title || data.original_title || data.name}
               </p>
-              <div
-                onClick={() => {
-                  setOpen(true);
-                  setMovies(data);
-                }}
-                className="relative w-full h-40 md:h-48 "
-              >
-                <Image
-                  src={`https://image.tmdb.org/t/p/w500${
-                    data?.poster_path || data?.backdrop_path
-                  }`}
-                  layout="fill"
-                  alt="error"
-                />
-              </div>
-              <div className="absolute bottom-0 right-0 ">
-                <DeleteRegistration data={data} />
+
+              <div className="relative   border-solid border-gray-500 ">
+                <div
+                  onClick={() => {
+                    setOpen(true);
+                    setMovies(data);
+                  }}
+                  className="relative w-full h-40 md:h-48 "
+                >
+                  <Image
+                    src={`https://image.tmdb.org/t/p/w500${
+                      data?.poster_path || data?.backdrop_path
+                    }`}
+                    layout="fill"
+                    alt="error"
+                  />
+                </div>
+                <div className="absolute bottom-0 right-0 ">
+                  <DeleteRegistration data={data} />
+                </div>
               </div>
             </div>
           );
