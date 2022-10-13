@@ -1,6 +1,6 @@
 import { Button, Pagination, TextInput } from "@mantine/core";
 import { IconSearch } from "@tabler/icons";
-import { FC, Suspense, useEffect, useState } from "react";
+import { ComponentProps, FC, Suspense, useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import {
   MoviesState,
@@ -11,6 +11,7 @@ import { Movies } from "src/type";
 
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
+import Select_Button from "./Select_Button";
 
 const TvSearch: FC = () => {
   const deliberation = useRecoilValue(SearchDeliberation);
@@ -42,47 +43,27 @@ const TvSearch: FC = () => {
   useEffect(() => {
     fetchSearch();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [page]);
+  }, [page, text, deliberation]);
+
+  // 非制御コンポーネント currentTarget.Search name属性にアクセス
+  const handleSubmit: ComponentProps<"form">["onSubmit"] = (e) => {
+    e.preventDefault();
+    setText(e.currentTarget.Search.value);
+  };
 
   return (
     <div className=" relative top-10">
-      <div className="flex justify-center  gap-x-5">
-        <Button
-          className={`${
-            search === true ? "px-4 SearcTrue" : "px-4 relative top-3"
-          } `}
-          onClick={() => setSearch(true)}
-        >
-          TV
-        </Button>
-
-        <Button
-          className={`${
-            search === false ? "px-4 SearcTrue " : "px-4 relative top-3"
-          } `}
-          onClick={() => setSearch(false)}
-        >
-          映画
-        </Button>
-      </div>
+      <Select_Button />
 
       {/* 　検索　 */}
       <div className="relative top-7  ">
-        <div className="flex justify-center gap-x-2">
-          <TextInput
-            label={`${deliberation?.title} 検索`}
-            onChange={(e) => setText(e.target.value)}
-          />
+        <form className="flex justify-center gap-x-2" onSubmit={handleSubmit}>
+          <TextInput label={`${deliberation?.title} 検索`} name="Search" />
 
-          <Button
-            onClick={() => {
-              fetchSearch();
-            }}
-            className=" py-2 bg-blue-600 mt-6"
-          >
+          <Button type="submit" className=" py-2 bg-blue-600 mt-6">
             <IconSearch />
           </Button>
-        </div>
+        </form>
       </div>
 
       {/* 　ページネーション　 */}
