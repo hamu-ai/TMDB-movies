@@ -3,7 +3,7 @@ import { FC } from "react";
 import { useRecoilState } from "recoil";
 import { SearchState } from "src/atom/MovieState";
 
-const Select: FC = () => {
+const Select_Button: FC = () => {
   const [search, setSearch] = useRecoilState(SearchState);
   return (
     <div className="flex justify-center  gap-x-5">
@@ -28,4 +28,4 @@ const Select: FC = () => {
   );
 };
 
-export default Select;
+export default Select_Button;

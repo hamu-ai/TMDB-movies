@@ -11,7 +11,7 @@ import { Movies } from "src/type";
 
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
-import Select from "./select";
+import Select_Button from "./Select_Button";
 
 const TvSearch: FC = () => {
   const deliberation = useRecoilValue(SearchDeliberation);
@@ -53,7 +53,7 @@ const TvSearch: FC = () => {
 
   return (
     <div className=" relative top-10">
-      <Select />
+      <Select_Button />
 
       {/* 　検索　 */}
       <div className="relative top-7  ">
