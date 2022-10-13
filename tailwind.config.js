@@ -8,7 +8,11 @@ module.exports = {
     "src/components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        reggae: ["Shadows Into Light"],
+      },
+    },
   },
   plugins: [require("tailwind-scrollbar-hide")],
 };
