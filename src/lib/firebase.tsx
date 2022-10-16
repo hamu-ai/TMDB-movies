@@ -1,7 +1,6 @@
-import "firebase/compat/auth";
-import "firebase/compat/firestore";
-
-import firebase from "firebase/compat/app";
+import { getApps, initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -13,10 +12,10 @@ const firebaseConfig = {
   measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_Id,
 };
 
-if (firebase.apps.length === 0) {
-  firebase.initializeApp(firebaseConfig);
+if (!getApps()?.length) {
+  // Firebaseアプリの初期化
+  initializeApp(firebaseConfig);
 }
 
-export const auth = firebase.auth();
-export const db = firebase.firestore();
-export default firebase;
+export const auth = getAuth();
+export const db = getFirestore();
