@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { MoviesState } from "src/atom/MovieState";
@@ -44,12 +44,17 @@ const Home: NextPage<Props> = ({
       />
       <Toaster position="top-center" reverseOrder={false} />
 
-      <BackImage comingSoon={comingSoon} />
-      <Moviemain title={"近日公開予定"} movie={comingSoon} />
-      <Moviemain movie={comingSoon2} />
-      <Moviemain title={"トップ評価"} movie={TopRating} />
-      <Moviemain title={"人気"} movie={popular} />
-      <Moviemain title={"トレンド"} movie={fetchtrend} />
+      <Suspense fallback={<p>Loading...</p>}>
+        <BackImage comingSoon={comingSoon} />
+      </Suspense>
+
+      <Suspense fallback={<p>Loading...</p>}>
+        <Moviemain title={"近日公開予定"} movie={comingSoon} />
+        <Moviemain movie={comingSoon2} />
+        <Moviemain title={"トップ評価"} movie={TopRating} />
+        <Moviemain title={"人気"} movie={popular} />
+        <Moviemain title={"トレンド"} movie={fetchtrend} />
+      </Suspense>
 
       {movieModal && <Modals />}
     </div>
