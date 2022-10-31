@@ -47,51 +47,31 @@ const Nav = () => {
             <Tabs defaultValue="gallery">
               <Tabs.List>
                 <Link href="/">
-                  <Tabs.Tab
-                    value="ホーム"
-                    icon={<IconHome size={20} />}
-                    className=""
-                  >
+                  <Tabs.Tab value="ホーム" icon={<IconHome size={20} />}>
                     ホーム
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/tv/1">
-                  <Tabs.Tab
-                    value="TV"
-                    icon={<IconDeviceTv size={20} />}
-                    className=""
-                  >
+                  <Tabs.Tab value="TV" icon={<IconDeviceTv size={20} />}>
                     TV
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Search">
-                  <Tabs.Tab
-                    value="Search"
-                    icon={<IconSearch size={20} />}
-                    className=""
-                  >
+                  <Tabs.Tab value="Search" icon={<IconSearch size={20} />}>
                     検索
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/favorite">
-                  <Tabs.Tab
-                    value="お気に入り"
-                    icon={<IconHeart size={20} />}
-                    className=""
-                  >
+                  <Tabs.Tab value="お気に入り" icon={<IconHeart size={20} />}>
                     お気に入り
                   </Tabs.Tab>
                 </Link>
 
                 <Link href="/Setting">
-                  <Tabs.Tab
-                    value="設定"
-                    icon={<IconSettings size={20} />}
-                    className=""
-                  >
+                  <Tabs.Tab value="設定" icon={<IconSettings size={20} />}>
                     設定
                   </Tabs.Tab>
                 </Link>
