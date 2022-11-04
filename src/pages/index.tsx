@@ -7,7 +7,7 @@ import BackImage from "src/components/BackImage";
 import Meta from "src/components/Meta";
 import Modals from "src/components/Modal";
 import Moviemain from "src/components/Moviemain";
-import { Movies } from "src/type";
+import { Movies, MoviesData } from "src/type";
 import { response } from "src/utils";
 
 type Props = {
@@ -64,7 +64,7 @@ const Home: NextPage<Props> = ({
 export const getStaticProps = async () => {
   try {
     const [comingSoon, TopRating, popular, fetchtrend, comingSoon2] =
-      await Promise.all([
+      await Promise.all<Promise<MoviesData>>([
         fetch(response.fetchcomingSoon).then((res) => res.json()),
         fetch(response.fetchcomingSoon2).then((res) => res.json()),
         fetch(response.fetchTopRating).then((res) => res.json()),
