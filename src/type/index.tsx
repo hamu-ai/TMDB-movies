@@ -1,3 +1,11 @@
+export type MoviesData = {
+  dates: { maximum: string; minimum: string };
+  page: number;
+  results: Movies[];
+  total_pages: number;
+  total_results: number;
+};
+
 export type Movies = {
   title: string;
   backdrop_path: string;
