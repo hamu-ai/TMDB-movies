@@ -4,7 +4,7 @@ import { FC, Suspense, useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
 import { useRecoilValue } from "recoil";
 import { MoviesState } from "src/atom/MovieState";
-import { Movies } from "src/type";
+import { Movies, MoviesData } from "src/type";
 
 import Meta from "../Meta";
 import Modals from "../Modal";
@@ -23,7 +23,7 @@ const TvPage: FC = () => {
         const data = await fetch(
           `https://api.themoviedb.org/3/discover/tv?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&timezone=Java&sort_by=popularity.desc&include_video=false&page=${page}`
         );
-        const res = await data.json();
+        const res: MoviesData = await data.json();
 
         setTvData(res.results);
       };

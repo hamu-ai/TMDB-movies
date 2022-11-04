@@ -7,7 +7,7 @@ import {
   SearchDeliberation,
   SearchState,
 } from "src/atom/MovieState";
-import { Movies } from "src/type";
+import { Movies, MoviesData } from "src/type";
 
 import Modals from "../Modal";
 import { SearcMap } from "./SearcMap";
@@ -31,7 +31,7 @@ const TvSearch: FC = () => {
       const data = await fetch(
         `https://api.themoviedb.org/3/search/${deliberation?.lookup}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=ja&query=${text}&page=${page}`
       );
-      const res = await data.json();
+      const res: MoviesData = await data.json();
 
       setTotalPage(res.total_pages);
       setMovieData(res.results);

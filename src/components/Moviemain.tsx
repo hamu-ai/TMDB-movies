@@ -20,7 +20,7 @@ const Moviemain: FC<Props> = ({ title, movie }) => {
 
   const ref = useRef<HTMLDivElement>(null);
 
-  const handleClick = (direction: string) => {
+  const handleClick = <T extends string>(direction: T) => {
     if (ref.current) {
       const { scrollLeft, clientWidth, scrollWidth } = ref.current;
 
